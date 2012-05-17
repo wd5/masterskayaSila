@@ -1,0 +1,35 @@
+msgid "clients_works"
+msgstr "Работы для клинетов"
+
+msgid "Clients_works"
+msgstr "работы для клинетов"
+
+msgid "client_category"
+msgstr "категория"
+
+msgid "client_categories"
+msgstr "категории работ"
+
+msgid "client_work"
+msgstr "работа"
+
+msgid "client_works"
+msgstr "работы"
+
+msgid "profile"
+msgstr "профиль"
+
+msgid "profiles"
+msgstr "профили клиентов"
+
+msgid "documents_category"
+msgstr "категория"
+
+msgid "documents_categories"
+msgstr "категории документов"
+
+msgid "document"
+msgstr "документ"
+
+msgid "documents"
+msgstr "документы для клиентов"

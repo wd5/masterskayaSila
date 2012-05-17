@@ -1,69 +1,12 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
-import datetime
+from apps.utils.utils import ImageField
 import os
 from pytils.translit import translify
-from django.db.models.signals import post_save
 from apps.utils.managers import PublishedManager
-from mptt.models import MPTTModel, TreeForeignKey, TreeManager
 
-def image_path(self, instance, filename):
-    filename = translify(filename).replace(' ', '_')
-    return os.path.join('uploads', 'images/menu', filename)
-
-class SiteMenu(MPTTModel):
-    title = models.CharField(
-        max_length = 150, 
-        verbose_name = u'Название'
-    )
-    image = models.ImageField(
-        verbose_name=u'Иконка',
-        upload_to = image_path, 
-        blank = True,
-        null = True,
-    )
-    parent = TreeForeignKey(
-        'self',
-        verbose_name = u'Родительский раздел',
-        related_name = 'children',
-        blank = True,
-        null = True,
-    )
-    url = models.CharField(
-        verbose_name = u'url', 
-        max_length = 150, 
-    )
-    order = models.IntegerField(
-        verbose_name = u'Порядок сортировки',
-        default = 10,
-        help_text = u'чем больше число, тем выше располагается элемент'
-    )
-    is_published = models.BooleanField(
-        verbose_name=u'Опубликовано',
-        default=True, 
-    )
-
-    objects = TreeManager()
-
-    class Meta:
-        verbose_name =_(u'menu_item')
-        verbose_name_plural =_(u'menu_items')
-        ordering = ['-order']
-
-    class MPTTMeta:
-        order_insertion_by = ['order']
-
-    def __unicode__(self):
-        return self.title
-
-def strip_url_title(sender, instance, created, **kwargs):
-    # remove the first and the last space
-    instance.title = instance.title.strip()
-    instance.url = instance.url.strip()
-    instance.save()
-
-post_save.connect(strip_url_title, sender=SiteMenu)
 
 type_choices = (
     (u'input',u'input'),
@@ -94,4 +37,28 @@ class Settings(models.Model):
 
     def __unicode__(self):
         return u'%s' % self.name
+
+def image_path_Blog(instance, filename):
+    return os.path.join('images','blog', translify(filename).replace(' ', '_') )
+
+class Blog(models.Model):
+    title = models.CharField(max_length=255, verbose_name=u'название')
+    short_description =  models.TextField(verbose_name = u'краткое описание')
+    text =  models.TextField(verbose_name = u'текст')
+    image = ImageField(upload_to=image_path_Blog, verbose_name=u'картинка')
+    date_create = models.DateTimeField(verbose_name = u'дата публикации', default = datetime.now)
+    is_published = models.BooleanField(verbose_name=u'опубликовано', default=True)
+
+    objects = PublishedManager()
+
+    def __unicode__(self):
+        return self.title
+
+    class Meta:
+        ordering = ['-date_create']
+        verbose_name = _(u'blog_item')
+        verbose_name_plural = _(u'blog_items')
+
+    def get_src_image(self):
+        return self.image.url
 

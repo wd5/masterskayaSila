@@ -1,0 +1,30 @@
+msgid "Service"
+msgstr "Сервис"
+
+msgid "service"
+msgstr "сервис"
+
+msgid "category"
+msgstr "категория"
+
+msgid "categories"
+msgstr "категории работ"
+
+msgid "client"
+msgstr "клиент"
+
+msgid "clients"
+msgstr "клиенты"
+
+msgid "work"
+msgstr "работа"
+
+msgid "works"
+msgstr "работы"
+
+msgid "media_item"
+msgstr "медиа"
+
+msgid "media_items"
+msgstr "медиа"
+

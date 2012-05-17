@@ -1,20 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 from django import forms
-from apps.siteblocks.models import SiteMenu, Settings
-from apps.utils.widgets import RedactorMini
-from sorl.thumbnail.admin import AdminImageMixin
-from mptt.admin import MPTTModelAdmin
+from apps.siteblocks.models import Settings,Blog
 from apps.utils.widgets import Redactor
-
-
-
-class SiteMenuAdmin(AdminImageMixin, MPTTModelAdmin):
-    list_display = ('title', 'url', 'order', 'is_published',)
-    list_display_links = ('title', 'url',)
-    list_editable = ('order', 'is_published',)
-
-admin.site.register(SiteMenu, SiteMenuAdmin)
 
 #--Виджеты jquery Редактора
 class SettingsAdminForm(forms.ModelForm):
@@ -41,3 +29,12 @@ class SettingsAdmin(admin.ModelAdmin):
     list_display = ('title','name','value',)
     form = SettingsAdminForm
 admin.site.register(Settings, SettingsAdmin)
+
+class BlogAdmin(admin.ModelAdmin):
+    list_display = ('id','title','date_create','is_published',)
+    list_display_links = ('id','title','date_create',)
+    list_editable = ('is_published',)
+    list_filter = ('is_published','date_create',)
+    search_fields = ('text','short_description','title',)
+admin.site.register(Blog, BlogAdmin)
+

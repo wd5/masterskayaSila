@@ -4,16 +4,16 @@ msgstr "Блоки сайта"
 msgid "siteblocks"
 msgstr "блоки сайта"
 
-msgid "menu_item"
-msgstr "элемент"
-
-msgid "menu_items"
-msgstr "элементы меню"
-
 msgid "site_setting"
 msgstr "параметр"
 
 msgid "site_settings"
 msgstr "настройки сайта"
+
+msgid "blog_item"
+msgstr "запись"
+
+msgid "blog_items"
+msgstr "записи в блоге"
 
 
