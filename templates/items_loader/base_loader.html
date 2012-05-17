@@ -1,0 +1,11 @@
+{% load pytils_numeral %}
+{% if items %}
+    {% for item in items %}
+        {% include load_template %}
+    {% endfor %}
+    <input type="hidden" id="endrange" value="{{ endrange }}">
+    {% if remaining_count %}
+        <input type="hidden" id="remaining_count_text" value="ещё <span class='cnt'>{{ remaining_count }}</span> запис{{ remaining_count|choose_plural:"ь,и,ей" }}">
+    {% endif %}
+    <input type="hidden" id="remaining_count" value="{{ remaining_count }}">
+{% endif %}
