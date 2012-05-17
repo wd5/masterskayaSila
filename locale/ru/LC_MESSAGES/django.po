@@ -77,12 +77,12 @@ msgid "Dashboard"
 msgstr ""
 
 #: apps/clientsworks/__init__.py:2
-msgid "clients_works"
-msgstr "Работы для клинетов"
+msgid "clientsworks"
+msgstr "работы для клинетов"
 
 #: apps/clientsworks/__init__.py:3
-msgid "Clients_works"
-msgstr "работы для клинетов"
+msgid "Clientsworks"
+msgstr "Работы для клинетов"
 
 #: apps/clientsworks/models.py:28
 msgid "client_category"

@@ -38,7 +38,6 @@ class ProfileAdmin(admin.ModelAdmin):
 admin.site.register(Profile, ProfileAdmin)
 
 
-
 #class ClientsWorkAdmin(admin.ModelAdmin):
 #    list_display = ('id','title','slug','date_create','is_published',)
 #    list_display_links = ('id','title','date_create','slug',)

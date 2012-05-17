@@ -1,8 +1,8 @@
-msgid "clients_works"
-msgstr "Работы для клинетов"
-
-msgid "Clients_works"
+msgid "clientsworks"
 msgstr "работы для клинетов"
+
+msgid "Clientsworks"
+msgstr "Работы для клинетов"
 
 msgid "client_category"
 msgstr "категория"

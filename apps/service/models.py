@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 import os
+from django.db.models.aggregates import Sum,Count
 from pytils.translit import translify
 from apps.utils.managers import PublishedManager
 from apps.utils.utils import ImageField
@@ -71,8 +72,9 @@ class Client(models.Model):
     def get_works(self):
         return self.work_set.published()
 
-    #def get_works_categories(self):
-    #       return self.work_set.f
+    def get_works_categories(self):
+        categories = self.work_set.values('workcategory').annotate(count=Count).order_by('count')
+        return categories
 
 class Work(models.Model):
     workcategory = models.ForeignKey(WorkCategory, verbose_name=u'категория работ')
