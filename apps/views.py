@@ -12,10 +12,20 @@ class IndexView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
-        context['blogs'] = Blog.objects.published()[:2]
+        #context['?????'] = ????????????
         return context
 
 index = IndexView.as_view()
+
+class LoaderExampleView(TemplateView):
+    template_name = 'loader_example.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(LoaderExampleView, self).get_context_data(**kwargs)
+        context['blogs'] = Blog.objects.published()[:2]
+        return context
+
+load_example = LoaderExampleView.as_view()
 
 @csrf_exempt
 def items_loader(request):

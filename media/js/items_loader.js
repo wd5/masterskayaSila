@@ -8,6 +8,7 @@ $(function() {
             data: {
                 cnt: el.find('.cnt').html(),
                 init_cnt: parent.find('.init_cnt').val(),
+                //init_cnt: parent.find('.l_item').length,
                 m_name: parent.find('.m_name').val(),
                 a_name: parent.find('.a_name').val()
             },
@@ -24,12 +25,11 @@ $(function() {
                 var rc = parent.find('#remaining_count').val()
                 if (rctxt!=undefined)
                     {el.html(rctxt)}
-
-                if (rc==0)
+                if (rc<=0)
                     {el.remove()}
-
                 parent.find('#remaining_count_text').remove()
                 parent.find('#remaining_count').remove()
+lo
             }
         });
 

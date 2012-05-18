@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% load thumbnail %}
+
+{% if page.title %}
+    {% block title %}
+        {{ page.title }} &mdash;
+    {% endblock %}
+{% endif %}
+
+{% block center %}
+
+    <div class="blog">
+
+        <input type="hidden" class="m_name" value="Blog">
+        <input type="hidden" class="a_name" value="siteblocks">
+        <input type="hidden" class="init_cnt" value="{{ blogs.count }}">
+
+        {% for blog in blogs %}
+            <div class="blog_item">
+                <img src="{{ blog.get_src_image }}" alt="" width="100">
+                <p class="title">{{ blog.id }} - {{ blog.title }}</p>
+                <p class="short_description">{{ blog.short_description }}</p>
+            </div>
+        {% endfor %}
+
+        <a href="#" class="load_items">ещё <span class="cnt">2</span> записи</a>
+
+    </div>
+
+    <div class="text text_page">
+        {% if page.image %}
+            <p>
+                {% thumbnail page.image "374x252" as  small %}
+                    <img src="{{ small.url }}" width="{{ small.x }}" height="{{ small.y }}" alt="" />
+                {% endthumbnail %}
+            </p>
+        {% endif %}
+        {{ page.content|safe }}
+    </div>
+{% endblock %}
+

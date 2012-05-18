@@ -3,6 +3,7 @@ from django.contrib import admin
 from django import forms
 from apps.siteblocks.models import Settings,Blog
 from apps.utils.widgets import Redactor
+from sorl.thumbnail.admin import AdminImageMixin
 
 #--Виджеты jquery Редактора
 class SettingsAdminForm(forms.ModelForm):
@@ -30,7 +31,7 @@ class SettingsAdmin(admin.ModelAdmin):
     form = SettingsAdminForm
 admin.site.register(Settings, SettingsAdmin)
 
-class BlogAdmin(admin.ModelAdmin):
+class BlogAdmin(AdminImageMixin,admin.ModelAdmin):
     list_display = ('id','title','date_create','is_published',)
     list_display_links = ('id','title','date_create',)
     list_editable = ('is_published',)
