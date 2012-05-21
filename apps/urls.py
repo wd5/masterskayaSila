@@ -3,7 +3,8 @@ from django.conf.urls.defaults import patterns, include, url
 
 #from apps.app.urls import urlpatterns as app_url
 
-from views import index,items_loader,load_example
+from views import index,load_example
+from apps.utils.utils import items_loader
 
 urlpatterns = patterns('',
     url(r'^$',index, name='index'),

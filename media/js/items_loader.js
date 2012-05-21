@@ -29,7 +29,7 @@ $(function() {
                     {el.remove()}
                 parent.find('#remaining_count_text').remove()
                 parent.find('#remaining_count').remove()
-lo
+
             }
         });
 
