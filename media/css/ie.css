@@ -1,0 +1,53 @@
+@charset "utf-8";
+
+* html #m {
+	position: absolute;
+	top: -1em;
+	left: 0;
+	visibility: hidden;
+	width: 100%;
+	height: 1em;
+	line-height: 1em;
+}
+* html .wrapper {
+	height: 100%;
+	width: expression(
+	(
+		document.getElementById('m')
+		&& document.getElementById('m').clientWidth < 976
+	)
+	?	'976px'
+	:	(
+			document.getElementById('m')
+			&& document.getElementById('m').clientWidth < 1250
+		)
+		?	'100%'
+		:	'1250px'
+	);
+}
+
+
+
+/*6-7*/
+.left, .right, .submit, .submit div, .footer_menu li, .footer_contacts_in, .submit, .submit div,
+.menu li, .col, .service_ic, .def_short, .client_srvs li, .work_lnk, .srv_example_lnk, .customers li,
+.our_offer_in, .video_example, .foto_example, .smi_example, .new_video, .new_out_adv, .work_video, 
+.work_out_adv, .video_examples .helper, .foto_example_img .helper, .smi_example_img .helper,
+.work_video_title_short, .work_out_adv_title_short, .docs_group_name {
+	*display:inline;
+	*zoom:1;
+}
+.some {
+	*position:relative;
+	*zoom:1;
+}
+.login {
+	border: 2px solid #44371d;
+}
+/*6-7*/
+
+
+
+/*6*/
+/*6*/
+
