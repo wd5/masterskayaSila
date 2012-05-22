@@ -8,7 +8,6 @@ from views import show_work_category,show_client
 urlpatterns = patterns('',
 
     url(r'^works/(?P<slug>[^/]+)/$',show_work_category, name='show_work_category'),
-
     url(r'^clients/(?P<slug>[^/]+)/$',show_client, name='show_client'),
 
 )

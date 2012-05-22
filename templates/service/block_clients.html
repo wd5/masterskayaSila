@@ -1,0 +1,13 @@
+{% if clients %}
+    <div class="customers">
+        <ul>
+            {% for client in clients %}
+                <li><a href="{{ client.get_absolute_url }}"><img src="{{ client.get_src_image }}" alt="" /></a></li>
+            {% endfor %}
+            <li class="customers_all"><a href="/clients/" class="customers_all_lnk">все клиенты</a></li>
+            <li class="helper"></li>
+        </ul>
+        <div class="customers_bl"></div>
+        <div class="customers_br"></div>
+    </div><!-- /customers -->
+{% endif %}

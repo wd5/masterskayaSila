@@ -9,21 +9,113 @@
     <!--[if lte IE 8]><link rel="stylesheet" type="text/css" media="screen" href="/media/css/ie.css" /><![endif]-->
     <script type="text/javascript" src="/media/js/jquery.js"></script>
     <script type="text/javascript" src="/media/js/items_loader.js"></script>
+    <script type="text/javascript" src="/media/js/script.js"></script>
     <title>
         {% block title %}
             {% if meta.title %}
                 {% ifnotequal meta.title ''  %}
-                    {{ meta.title }} &mdash;
+                    {{ meta.title }}
                 {% endifnotequal %}
             {% endif %}
         {% endblock %}
-        {{ site_name }}
+        {% comment %}&mdash;{{ site_name }}{% endcomment %}
     </title>
 </head>
 
 <body>
-{% block_menu request.path %}
-{% block center %}
-{% endblock %}
+
+{% block start_wrpr_out_div %}{% endblock %}
+
+    <div class="top_hg_out"><div class="top_hg"><div class="top_hg_in">
+        <div class="corner_left"></div>
+        <div class="corner_right"></div>
+    </div></div></div>
+
+    <div class="wrapper">
+
+    <!--PAGE-->
+    <div class="page">
+
+        <!--HEADER-->
+        <div class="header">
+            <a id="logo_box" href="/" title="Мастерская «Сила Головатый»"><img id="logo" src="/media/img/logo.png" alt="Мастерская «Сила Головатый»" width="132" height="110" /></a>
+
+            {% block_menu request.path %}
+
+            <div class="contacts">
+                <div class="tel">{{ phonenum|safe }}</div>
+                <address class="adr">{{ address|safe }}</address>
+                <a href="/address/" class="address_lnk">адрес и схема проезда</a>
+                <div class="corners corner_topleft"></div>
+                <div class="corners corner_bottomright"></div>
+            </div><!--/contacts-->
+            <div class="login_lnk"><a href="#" id="login_lnk">вход для клиента</a><span class="corners corner_left"></span><span class="corners corner_right"></span></div>
+        </div>
+        <!--/HEADER-->
+
+        <!--MAIN-->
+        <div class="main">
+
+            {% block pre_left %}{% endblock %}
+
+            <div class="col left {% block col_left_type %}cols18{% endblock %}">
+                {% block left %}
+                {% endblock %}
+            </div><!--/left-->
+
+            <div class="col right {% block col_right_type %}cols5{% endblock %}">
+                {% block right %}
+                {% endblock %}
+            </div><!--/right-->
+
+            {% block post_right %}{% endblock %}
+
+        </div>
+        <!--/MAIN-->
+
+        <!--FOOTER-->
+        <div class="footer">
+    		<div id="copyright">© 2005-{% now "Y" %} Мастерская «Сила Головатый»</div>
+
+            {% block_footer_menu request.path %}
+
+    		<div class="footer_contacts">
+    			<div class="footer_contacts_in">
+                    <address>{{ address_footer|safe }}</address>
+                    <div class="tel">{{ phonenum|safe }}</div>
+    			</div>
+    			<div class="corners corner_topleft"></div>
+    			<div class="corners corner_bottomright"></div>
+    		</div>
+    		<!-- <a id="madein" title="Разработка сайта — студия OctoberWeb" href="http://octoberweb.ru/"><img id="octoberweb" alt="Разработка сайта — студия OctoberWeb" src="static/img/octoberweb.png" width="32" height="32"/>разработка сайта <span>OctoberWeb</span></a> -->
+        </div>
+        <!--/FOOTER-->
+
+    </div>
+    <!--/PAGE-->
+
+    </div><!--/wrapper-->
+
+{% block end_wrpr_out_div %}{% endblock %}
+
+    <div class="bot_hg"></div>
+    {% block overlay %}
+        <div class="overlay">
+        	<div class="overlay_in">
+        		<div class="login">
+        			<form action="#" method="post" class="login_form">
+        				<h1>Вход для клиента</h1>
+        				<div class="input"><label>Логин<input type="text" name="" /></label></div>
+        				<div class="input"><label>Пароль<input type="password" name="" /></label></div>
+        				<div class="submit">
+        					<div><input type="submit" value="Войти" /></div>
+        				</div>
+        			</form>
+        			<div class="ic_close"></div>
+        		</div><!-- /login -->
+        	</div><!-- /overlay_in -->
+        </div><!-- /overlay -->
+    {% endblock %}
+
 </body>
 </html>

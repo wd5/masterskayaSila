@@ -51,3 +51,15 @@ def block_menu(url):
     menu = Page.objects.filter(parent=None, is_at_menu=True)
     #menu = get_active_menu(url, menu)
     return {'menu': menu, 'current': current}
+
+@register.inclusion_tag("pages/block_footer_menu.html")
+def block_footer_menu(url):
+    url = url.split('/')
+
+    if url[1]:
+        current = u'/%s/' % url[1]
+    else:
+        current = u'/'
+    menu = Page.objects.filter(parent=None, is_at_footer_menu=True)
+    #menu = get_active_menu(url, menu)
+    return {'footer_menu': menu, 'current': current}

@@ -1,0 +1,9 @@
+{% if footer_menu %}
+    <div class="footer_menu">
+        <ul>
+            {% for item in footer_menu %}
+                <li><a href="{{ item.get_absolute_url }}">{{ item.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}

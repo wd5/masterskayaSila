@@ -64,7 +64,8 @@ class Client(models.Model):
         verbose_name_plural = _(u'clients')
 
     def get_absolute_url(self):
-        return reverse('show_client',kwargs={'slug': '%s' % self.slug})
+        #return reverse('show_client',kwargs={'slug': '%s' % self.slug})
+        return u'/clients/%s/' % self.slug
 
     def get_src_image(self):
         return self.image.url
