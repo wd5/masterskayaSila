@@ -3,13 +3,17 @@
 {% for item in items %}
 
     <div class="blog_item loaded" style="display: none;">
-       <img src="{{ item.get_src_image }}" alt="" width="100">
-       <p class="title">{{ item.id }} - {{ item.title }}</p>
-       <p class="short_description">{{ item.short_description }}</p>
+        <a href="{{ item.get_absolute_url }}" class="blog_item_icon"><img src="{{ item.get_src_image }}" alt="" /></a>
+        <div class="blog_item_def">
+            <a href="{{ item.get_absolute_url }}" class="blog_item_lnk">{{ item.title }}</a>
+            <p class="blog_item_def_zm">{{ item.short_description }}</p>
+        </div>
     </div>
 
     {% if remaining_count %}
-        <input type="hidden" id="remaining_count_text" value="ещё <span class='cnt'>{{ remaining_count }}</span> запис{{ remaining_count|choose_plural:"ь,и,ей" }}">
+        <input type="hidden" id="remaining_count_text" value="Ещё <span class='cnt'>{{ remaining_count }}</span> запис{{ remaining_count|choose_plural:"ь,и,ей" }}">
     {% endif %}
 
 {% endfor %}
+
+

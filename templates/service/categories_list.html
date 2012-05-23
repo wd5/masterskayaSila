@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% load thumbnail service_extras siteblocks_extras %}
+
+{% block left %}
+    <div class="srvs">
+        {% for category in categories %}
+            <div class="srv">
+                <a href="{{ category.get_absolute_url }}" class="srv_icon">
+                        <img src="{% if category.id == 4 %}/media/img/video_zm.png{% endif %}
+                        {% if category.id == 5 %}/media/img/design_zm.png{% endif %}
+                        {% if category.id == 2 %}/media/img/foto_zm.png{% endif %}
+                        {% if category.id == 1 %}/media/img/out_adv_zm.png{% endif %}
+                        {% if category.id == 3 %}/media/img/smi_zm.png{% endif %}" alt=""/>
+                </a>
+                <div class="srv_def">
+                    <a href="{{ category.get_absolute_url }}" class="srv_name">{{ category.title }}</a>
+                    <p class="srv_def_zm">{{ category.short_description }}</p>
+
+                    {% for work in category.get_works_at_list %}
+                        <div class="srv_example"><a href="{{ work.get_absolute_url }}" class="srv_example_logo"><img src="{{ work.get_src_image }}" alt="" /></a><a href="{{ work.get_absolute_url }}" class="srv_example_lnk">{{ work.title }}</a></div>
+                    {% endfor %}
+
+                    <div class="cl"></div>
+                </div>
+            </div>
+        {% endfor %}
+    </div><!-- /srvs -->
+{% endblock %}
+
+{% block col_right_type %}cols5 with_ring{% endblock %}
+
+{% block right %}
+    {% block_adv_maintenance 'small' %}
+{% endblock %}
+
+{% block post_right %}
+    {% block_clients %}
+{% endblock %}

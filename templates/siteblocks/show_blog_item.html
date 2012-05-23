@@ -1,17 +1,14 @@
 {% extends "base.html" %}
 
-{% load thumbnail siteblocks_extras service_extras %}
+{% load thumbnail service_extras siteblocks_extras %}
 
-{% if page.title %}
-    {% block title %}
-        {{ page.title }}
-    {% endblock %}
-{% endif %}
+{% block title %}{{ blog_item.title }} &mdash; Блог{% endblock %}
 
 {% block left %}
     <div class="text">
-        <h1>{{ page.title }}</h1>
-        {{ page.content|safe }}
+        <h1>{{ blog_item.title }}</h1>
+        <img src="{{ blog_item.get_src_image }}" alt="" />
+        {{ blog_item.text|safe }}
     </div>
 {% endblock %}
 
@@ -24,7 +21,3 @@
 {% block post_right %}
     {% block_clients %}
 {% endblock %}
-
-
-
-

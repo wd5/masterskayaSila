@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+
+{% load thumbnail service_extras siteblocks_extras %}
+
+{% block title %}{{ client.title }} &mdash; Наши клиенты{% endblock %}
+
+{% block left %}
+    <div class="client_detail">
+
+        <span href="#" class="client_icon"><img src="{{ client.get_src_image }}" alt="" /></span>
+        <h1>{{ client.title }}</h1>
+        <p class="client_def_zl">{{ client.description }}</p>
+
+        {% for category in client.get_works_categories %}
+            {% if category.workcategory == 4 %}
+                <div class="video_examples" id="video_examples">
+                    <div class="work_group">
+                        <img src="/media/img/video_zs.png" alt="" />
+                        <span class="work_group_title">Видеопродукция</span>
+                    </div>
+                    <div class="video_example">
+                        <div class="video_example_img">
+                            <img src="/media/images/video1.jpg" alt="" />
+                            <div class="play_ic"></div>
+                        </div>
+                        <span class="video_example_title">Рекламный ролик для частного поселка «Чеховский»</span>
+                    </div>
+                    <div class="video_example">
+                        <div class="video_example_img">
+                            <img src="/media/images/video1.jpg" alt="" />
+                            <div class="play_ic"></div>
+                        </div>
+                        <span class="video_example_title">Рекламный ролик для частного поселка «Чеховский»</span>
+                    </div>
+                    <div class="video_example">
+                        <div class="video_example_img">
+                            <img src="/media/images/video1.jpg" alt="" />
+                            <div class="play_ic"></div>
+                        </div>
+                        <span class="video_example_title">Рекламный ролик для частного поселка «Чеховский»</span>
+                    </div>
+                    <div class="video_example">
+                        <div class="video_example_img">
+                            <img src="/media/images/video1.jpg" alt="" />
+                            <div class="play_ic"></div>
+                        </div>
+                        <span class="video_example_title">Рекламный ролик для частного поселка «Чеховский»</span>
+                    </div>
+                    <div class="video_example">
+                        <div class="video_example_img">
+                            <img src="/media/images/video1.jpg" alt="" />
+                            <div class="play_ic"></div>
+                        </div>
+                        <span class="video_example_title">Рекламный ролик для частного поселка «Чеховский»</span>
+                    </div>
+                    <div class="video_example">
+                        <div class="video_example_img">
+                            <img src="/media/images/video1.jpg" alt="" />
+                            <div class="play_ic"></div>
+                        </div>
+                        <span class="video_example_title">Рекламный ролик для частного поселка «Чеховский»</span>
+                    </div>
+                    <div class="helper"></div>
+                    <div class="show_more">
+                        <a href="#">Ещё 12 работ</a>
+                    </div>
+                </div><!-- /video_examples -->
+            {% endif %}
+
+            {% if category.workcategory == 2 %}
+                <div class="foto_examples" id="foto_examples">
+                    <div class="work_group">
+                        <img src="/media/img/foto_zs.png" alt="" />
+                        <span class="work_group_title">Фотосъемка</span>
+                    </div>
+                    <div class="foto_example">
+                        <div class="foto_example_img">
+                            <img src="/media/images/video1.jpg" alt="" />
+                            <div class="play_ic"></div>
+                        </div>
+                        <span class="foto_example_title">Рекламный ролик для частного поселка «Чеховский»</span>
+                    </div>
+                    <div class="helper"></div>
+                    <div class="show_more">
+                        <a href="#">Ещё 12 работ</a>
+                    </div>
+                </div><!-- /foto_examples -->
+            {% endif %}
+
+            {% if category.workcategory == 3 %}
+                <div class="smi_examples" id="smi_examples">
+                    <div class="work_group">
+                        <img src="/media/img/smi_zs.png" alt="" />
+                        <span class="work_group_title">СМИ</span>
+                    </div>
+                    <div class="smi_example">
+                        <div class="smi_example_img">
+                            <img src="/media/images/video1.jpg" alt="" />
+                            <div class="play_ic"></div>
+                        </div>
+                        <span class="smi_example_title">Рекламный ролик для частного поселка «Чеховский»</span>
+                    </div>
+                    <div class="helper"></div>
+                    <div class="show_more">
+                        <a href="#">Ещё 12 работ</a>
+                    </div>
+                </div><!-- /smi_examples -->
+            {% endif %}
+        {% endfor %}
+
+    </div><!-- /client_detail -->
+{% endblock %}
+
+{% block col_right_type %}cols5 with_ring{% endblock %}
+
+{% block right %}
+    {% block_adv_maintenance 'small' %}
+{% endblock %}
+
+{% block post_right %}
+
+    {% for category in client.get_works_categories %}
+
+        {% if category.workcategory == 5 %}
+            <div class="design_examples" id="design_examples">
+                <div class="work_group">
+                    <img src="/media/img/design_zs.png" alt="" />
+                    <span class="work_group_title">Дизайн</span>
+                </div>
+                <div class="design_example">
+                    <div class="design_example_img">
+                        <img src="/media/images/out_adv1.png" alt="" />
+                    </div>
+                </div>
+                <div class="show_more">
+                    <a href="#">Ещё 12 работ</a>
+                </div>
+            </div><!-- /design_examples -->
+        {% endif %}
+
+        {% if category.workcategory == 1 %}
+            <div class="out_adv_examples" id="out_adv_examples">
+                <div class="work_group">
+                    <img src="/media/img/out_adv_zs.png" alt="" />
+                    <span class="work_group_title">Билборды и рекламная компания</span>
+                </div>
+                <div class="out_adv_example">
+                    <div class="out_adv_example_img">
+                        <img src="/media/images/out_adv1.png" alt="" />
+                    </div>
+                </div>
+                <div class="show_more">
+                    <a href="#">Ещё 12 работ</a>
+                </div>
+            </div><!-- /out_adv_examples -->
+        {% endif %}
+
+    {% endfor %}
+
+    {% block_clients %}
+{% endblock %}

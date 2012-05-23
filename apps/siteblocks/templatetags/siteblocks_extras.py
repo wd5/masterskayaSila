@@ -11,3 +11,20 @@ def block_static(name):
     except Settings.DoesNotExist:
         setting = False
     return {'block': block,}
+
+@register.inclusion_tag("siteblocks/block_adv_maintenance.html")
+def block_adv_maintenance(type):
+    try:
+        adv_m_texts = Settings.objects.filter(name__contains='adv_maintenance')
+    except Settings.DoesNotExist:
+        adv_m_texts = False
+
+    if adv_m_texts:
+        adv_first_text = adv_m_texts[0]
+        adv_second_text = adv_m_texts[1]
+    else:
+        adv_first_text = False
+        adv_second_text = False
+
+    return {'adv_first_text': adv_first_text, 'adv_second_text': adv_second_text, 'type':type, }
+

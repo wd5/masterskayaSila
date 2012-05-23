@@ -1,4 +1,5 @@
 $(function(){
+
 	function overflow() {
 		if ($('body').width() < 996) {
 			$('body').css('overflow-x','visible');
@@ -19,4 +20,11 @@ $(function(){
 		overflow();
 	});
 	overflow();
+
+    // для блока block_adv_maintenance 'small'
+    p = $('#adv_text_blc').find('p').first();
+    $('#adv_text_blc').html($('#adv_text_blc').find('a'));
+    $('#adv_text_blc').prepend(p);
+    $('#adv_text_blc').show();
+
 });

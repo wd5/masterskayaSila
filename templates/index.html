@@ -1,46 +1,39 @@
 {% extends "base.html" %}
 
-{% load thumbnail service_extras %}
+{% load thumbnail service_extras siteblocks_extras %}
 
 {% block pre_left %}
-    <div class="servicies_icons">
-        <div class="service service_video"><a href="#" class="service_ic"><img src="/media/img/video_zl.png" alt="" /></a><div class="def_short"><a href="#">Видеоролики</a>разработка рекламных роликов</div></div>
-        <div class="service service_design"><a href="#" class="service_ic"><img src="/media/img/design_zl.png" alt="" /></a><div class="def_short"><a href="#">Дизайн</a>разработка макетов и корпоративных стилей визиток, листовок </div></div>
-        <div class="service service_foto"><a href="#" class="service_ic"><img src="/media/img/foto_zl.png" alt="" /></a><div class="def_short"><a href="#">Фотосъемка</a>репортажная, событийная рекламная, предметная интерьерная съемка</div></div>
-        <div class="service service_out_adv"><a href="#" class="service_ic"><img src="/media/img/out_adv_zl.png" alt="" /></a><div class="def_short"><a href="#">Наружная реклама</a>Создание и размещение вашей рекламы на билбордах и сити-форматах</div></div>
-        <div class="service service_smi"><a href="#" class="service_ic"><img src="/media/img/smi_zl.png" alt="" /></a><div class="def_short"><a href="#">Размещение в СМИ</a>Подготовка и размещение печатного материала в газетах и журналах</div></div>
-    </div><!-- /servicies_icons -->
+    {% if works_categories %}
+        <div class="servicies_icons">
+            {% for works_category in works_categories %}
+                <div class="service service{% if works_category.id == 4 %}_video{% endif %}{% if works_category.id == 5 %}_design{% endif %}{% if works_category.id == 2 %}_foto{% endif %}{% if works_category.id == 1 %}_out_adv{% endif %}{% if works_category.id == 3 %}_smi{% endif %}">
+                    <a href="{{ works_category.get_absolute_url }}" class="service_ic"><img src="{{ works_category.get_src_image }}" alt="" /></a><div class="def_short"><a href="{{ works_category.get_absolute_url }}">{{ works_category.title }}</a>{{ works_category.short_description_on_main }}</div>
+                </div>
+            {% endfor %}
+        </div><!-- /servicies_icons -->
+    {% endif %}
 {% endblock %}
 
 {% block col_left_type %}cols14{% endblock %}
 {% block left %}
-    <div class="adv_full adv_full_zl">Комплексное<span>рекламное сопровождение</span></div>
-    <div class="service_main">
-        <h1>Управление рекламным бюджетом</h1>
-        <div class="our_offer"><div class="our_offer_in">Полный и комплексный набор услуг для вашей рекламы. Клиент не переплачивает за услуги размещения, так как мы получаем специальную агентскую скидку от СМИ. Нам интересно работать эффективно.</div></div>
-        <div class="our_offer_def_full">
-            <p>Наша компания оказыват комплексное сопровождение любого предприятия — от разработки рекламной стратегии до непосредственного размещения видеороликов в эфире телеканалов, журналистских материалов в печатных СМИ, баннеров в лучших местах города и края.</p>
-            <p>Клиент, обращаясь к нам не переплачивает за услуги размещения, так как мы получаем специальную агентскую скидку от СМИ. Нам интересно работать в комплексе и работать эффективно.</p>
-            <a href="#" class="def_lnk">Рекламное сопровождение</a>
-        </div>
-        <div class="cl"></div>
-    </div>
+    {% block_adv_maintenance 'big' %}
 {% endblock %}
 
 {% block col_right_type %}cols9{% endblock %}
 {% block right %}
+    {% if works %}
     <div class="works_out">
         <div class="works">
             <h1>Наши работы</h1>
             <ul>
-                <li class="work"><a href="#" class="work_lnk_img"><img src="/media/images/client1_logo_mini.png" alt="" /></a><a href="#" class="work_lnk">Комплексное сопровождение для медицинского центра «Академия здоровья»</a><div class="cl"></div></li>
-                <li class="work"><a href="#" class="work_lnk_img"><img src="/media/images/client2_logo_mini.png" alt="" /></a><a href="#" class="work_lnk">Изготовление макетов и размещение биллбордов для торговой сети «Букер»</a><div class="cl"></div></li>
-                <li class="work"><a href="#" class="work_lnk_img"><img src="/media/images/client3_logo_mini.png" alt="" /></a><a href="#" class="work_lnk">Изготоволение и прокат рекламных роликов для центра «Александрия»</a><div class="cl"></div></li>
-                <li class="work"><a href="#" class="work_lnk_img"><img src="/media/images/client1_logo_mini.png" alt="" /></a><a href="#" class="work_lnk">Комплексное сопровождение для медицинского центра «Академия здоровья»</a><div class="cl"></div></li>
-                <li><a href="#" class="work_lnk_all">все наши работы</a></li>
+                {% for work in works %}
+                    <li class="work"><a href="{{ work.get_absolute_url }}" class="work_lnk_img"><img src="{{ work.get_src_image }}" alt="" /></a><a href="{{ work.get_absolute_url }}" class="work_lnk">{{ work.title }}</a><div class="cl"></div></li>
+                {% endfor %}
+                <li><a href="/services_and_works/" class="work_lnk_all">все наши работы</a></li>
             </ul>
         </div>
     </div><!-- /works -->
+    {% endif %}
 {% endblock %}
 
 {% block post_right %}

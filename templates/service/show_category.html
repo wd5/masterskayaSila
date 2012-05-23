@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+
+{% load thumbnail service_extras siteblocks_extras %}
+
+{% block title %}
+    {{ category.title }}
+{% endblock %}
+
+{% block start_wrpr_out_div %}<div class="wrapper_out">{% endblock %}
+
+
+{% block left %}
+    <div class="service_detail">
+        <span href="#" class="service_icon"><img src="{% if category.id == 4 %}/media/img/video_zm.png{% endif %}
+                                {% if category.id == 5 %}/media/img/design_zm.png{% endif %}
+                                {% if category.id == 2 %}/media/img/foto_zm.png{% endif %}
+                                {% if category.id == 1 %}/media/img/out_adv_zm.png{% endif %}
+                                {% if category.id == 3 %}/media/img/smi_zm.png{% endif %}" alt="" /></span>
+        <h1>{{ category.title }}</h1>
+        <p class="service_def_zl">{{ category_descr_part1 }}</p>
+        <div class="our_offer"><div class="our_offer_in">{{ category.additional_text }}</div></div>
+        <div class="def_full">
+            {{ category_descr_part2 }}
+        </div>
+        <!--[if gte IE 8]><div class="cl"></div><![endif]-->
+
+        {% if category.id == 4 %}
+            <div class="video_examples">
+            <div class="video_example">
+                <div class="video_example_img">
+                    <img src="/media/images/video1.jpg" alt="" />
+                    <a href="#" class="play_ic"></a>
+                </div>
+                <span class="video_example_title">Рекламный ролик для частного поселка «Чеховский»</span>
+            </div>
+            <div class="video_example">
+                <div class="video_example_img">
+                    <img src="/media/images/video1.jpg" alt="" />
+                    <a href="#" class="play_ic"></a>
+                </div>
+                <span class="video_example_title">Рекламный ролик для частного поселка «Чеховский»</span>
+            </div>
+            <div class="video_example">
+                <div class="video_example_img">
+                    <img src="/media/images/video1.jpg" alt="" />
+                    <a href="#" class="play_ic"></a>
+                </div>
+                <span class="video_example_title">Рекламный ролик для частного поселка «Чеховский»</span>
+            </div>
+            <div class="video_example">
+                <div class="video_example_img">
+                    <img src="/media/images/video1.jpg" alt="" />
+                    <a href="#" class="play_ic"></a>
+                </div>
+                <span class="video_example_title">Рекламный ролик для частного поселка «Чеховский»</span>
+            </div>
+            <div class="helper"></div>
+            <div class="show_more">
+                <a href="#">Ещё 12 работ</a>
+            </div>
+        </div><!-- /video_examples -->
+        {% endif %}
+
+        {% if category.id == 2 %}
+            <div class="foto_examples">
+            <div class="foto_example">
+                <div class="foto_example_img">
+                    <img src="/media/images/video1.jpg" alt="" />
+                    <a href="#" class="play_ic"></a>
+                </div>
+                <span class="foto_example_title">Рекламный ролик для частного поселка «Чеховский»</span>
+            </div>
+            <div class="helper"></div>
+            <div class="show_more">
+                <a href="#">Ещё 12 работ</a>
+            </div>
+        </div><!-- /foto_examples -->
+        {% endif %}
+
+        {% if category.id == 3 %}
+            <div class="smi_examples">
+            <div class="smi_example">
+                <div class="smi_example_img">
+                    <img src="/media/images/video1.jpg" alt="" />
+                    <a href="#" class="play_ic"></a>
+                </div>
+                <span class="smi_example_title">Рекламный ролик для частного поселка «Чеховский»</span>
+            </div>
+            <div class="helper"></div>
+            <div class="show_more">
+                <a href="#">Ещё 12 работ</a>
+            </div>
+        </div><!-- /smi_examples -->
+        {% endif %}
+
+    </div><!-- /service_detail -->
+{% endblock %}
+
+{% block right %}
+    <div class="blk_out orange_fr">
+        <div class="blk">
+            <h2>Записи в блоге</h2>
+            <a href="{{ blog_item.get_absolute_url }}" class="blk_lnk">{{ blog_item.title }}</a>
+            <img src="{{ blog_item.get_src_image }}" alt="" />
+            <p>{{ blog_item.short_description|truncatewords:29 }}</p>
+        </div>
+    </div><!-- /blk -->
+{% endblock %}
+
+{% block post_right %}
+
+    {% if category.id == 1 %}
+        <div class="out_adv_examples">
+
+            <input type="hidden" class="m_name" value="work">
+            <input type="hidden" class="a_name" value="service">
+            <input type="hidden" class="init_cnt" value="{{ category.get_works.count }}">
+
+            {% for work in category.get_works %}
+                <div class="out_adv_example">
+                    <h1 class="out_adv_example_title">{{ work.title }}</h1>
+                    <div class="out_adv_example_img">
+                        {% for works_media in work.get_works_media %}
+                            <img src="{{ works_media.get_src_image }}" alt="{{ work.title }}" />
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+
+            <div class="show_more">
+                <a href="#" class="load_items">Ещё <span class="cnt">2</span> работы</a>
+            </div>
+
+        </div><!-- /out_adv_examples -->
+
+    {% endif %}
+
+    {% if category.id == 5 %}
+        <div class="design_examples">
+            <div class="design_example">
+                <h1 class="design_example_title">Серия билбордов для продуктовой сети «Парус»</h1>
+                <div class="design_example_img">
+                    <img src="/media/images/out_adv1.png" alt="Серия билбордов для продуктовой сети «Парус»" />
+                </div>
+            </div>
+            <div class="show_more">
+                <a href="#">Ещё 12 работ</a>
+            </div>
+        </div><!-- /design_examples -->
+    {% endif %}
+
+    {% block_clients %}
+{% endblock %}
+
+{% block end_wrpr_out_div %}</div>{% endblock %}

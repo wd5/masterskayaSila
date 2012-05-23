@@ -16,6 +16,8 @@ class WorkCategory(models.Model):
     title = models.CharField(max_length=255, verbose_name=u'название')
     image = ImageField(upload_to=image_path_work_category, verbose_name=u'картинка')
     short_description =  models.TextField(verbose_name = u'краткое описание')
+    short_description_on_main =  models.CharField(max_length=255, verbose_name = u'краткое описание отображаемое на главной странице', blank=True)
+    additional_text =  models.TextField(verbose_name = u'текст для врезки')
     description =  models.TextField(verbose_name = u'описание')
     slug = models.SlugField(verbose_name=u'Алиас', help_text=u'уникальное имя на латинице')
     works_count = models.IntegerField(verbose_name = u'количество отображаемых работ', help_text=u'Количество работ для начального отображения в категории.', default=2)
@@ -38,8 +40,11 @@ class WorkCategory(models.Model):
     def get_src_image(self):
         return self.image.url
 
+    def get_works_at_list(self):
+        return self.work_set.published().filter(is_at_category_list=True)
+
     def get_works(self):
-        return self.work_set.published()
+        return self.work_set.published()[:self.works_count]
 
 def image_path_client(instance, filename):
     return os.path.join('images','clients', translify(filename).replace(' ', '_') )
@@ -64,8 +69,8 @@ class Client(models.Model):
         verbose_name_plural = _(u'clients')
 
     def get_absolute_url(self):
-        #return reverse('show_client',kwargs={'slug': '%s' % self.slug})
-        return u'/clients/%s/' % self.slug
+        return reverse('show_client',kwargs={'slug': '%s' % self.slug})
+        #return u'/clients/%s/' % self.slug
 
     def get_src_image(self):
         return self.image.url
@@ -74,14 +79,17 @@ class Client(models.Model):
         return self.work_set.published()
 
     def get_works_categories(self):
-        categories = self.work_set.values('workcategory').annotate(count=Count).order_by('count')
+        categories = self.work_set.values('workcategory').annotate()
         return categories
+
+def image_path_works(instance, filename):
+    return os.path.join('images','works', translify(filename).replace(' ', '_') )
 
 class Work(models.Model):
     workcategory = models.ForeignKey(WorkCategory, verbose_name=u'категория работ')
     client = models.ForeignKey(Client, verbose_name=u'клиент')
     title = models.CharField(max_length=255, verbose_name=u'название')
-    slug = models.SlugField(verbose_name=u'Алиас', help_text=u'уникальное имя на латинице')
+    image = ImageField(upload_to=image_path_works, verbose_name=u'картинка')
     is_at_category_list = models.BooleanField(verbose_name=u'отображать в списке категорий', default=True)
     is_on_main = models.BooleanField(verbose_name=u'отображать в блоке на главной', default=False)
     date_create = models.DateTimeField(verbose_name = u'дата создания', default = datetime.now)
@@ -97,9 +105,26 @@ class Work(models.Model):
         verbose_name = _(u'work')
         verbose_name_plural = _(u'works')
 
-    def get_works_media(self):
-            return self.worksmedia_set.all()
+    def get_src_image(self):
+            return self.image.url
 
+    def get_absolute_url(self):
+        id_cat = self.workcategory.id
+        if id_cat==4:
+            href = 'video_examples'
+        elif id_cat==2:
+            href = 'foto_examples'
+        elif id_cat==3:
+            href = 'smi_examples'
+        elif id_cat==5:
+            href = 'design_examples'
+        elif id_cat==1:
+            href = 'out_adv_examples'
+
+        return u'%s#%s' % (self.client.get_absolute_url(),href)
+
+    def get_works_media(self):
+        return self.worksmedia_set.all()
 
 def image_path_media(instance, filename):
     return os.path.join('images','worksMedia', translify(filename).replace(' ', '_') )
@@ -111,7 +136,7 @@ class WorksMedia(models.Model):
     order = models.IntegerField(u'порядок сортировки', help_text=u'Чем больше число, тем выше располагается элемент', default=10)
 
     def __unicode__(self):
-           return self.title
+           return u'контент к работе %s' % self.work.title
 
     class Meta:
         ordering = ['-order']
@@ -119,7 +144,7 @@ class WorksMedia(models.Model):
         verbose_name_plural = _(u'media_items')
 
     def get_src_image(self):
-            return self.image.url
+        return self.image.url
 
 
 

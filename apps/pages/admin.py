@@ -44,7 +44,7 @@ class PageAdmin(AdminImageMixin, MPTTModelAdmin):
     list_select_related = True
     form = PageAdminForm
     inlines = [
-        PageDocInline,
+        #PageDocInline,
         PagePicInline,
     ]
 

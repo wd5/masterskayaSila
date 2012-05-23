@@ -5,6 +5,7 @@ from django.db import models
 from apps.utils.utils import ImageField
 import os
 from pytils.translit import translify
+from django.core.urlresolvers import reverse
 from apps.utils.managers import PublishedManager
 
 
@@ -62,3 +63,5 @@ class Blog(models.Model):
     def get_src_image(self):
         return self.image.url
 
+    def get_absolute_url(self):
+        return reverse('show_blog_item',kwargs={'pk': '%s' % self.pk})

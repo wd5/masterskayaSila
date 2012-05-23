@@ -16,7 +16,7 @@ class WorkCategoryAdminForm(forms.ModelForm):
             '/media/js/jquery.synctranslit.js',
             )
 
-class WorkCategoryAdmin(admin.ModelAdmin):
+class WorkCategoryAdmin(AdminImageMixin, admin.ModelAdmin):
     list_display = ('id','title','slug','order','is_published',)
     list_display_links = ('id','title','slug',)
     list_editable = ('order','is_published',)
@@ -36,7 +36,7 @@ class ClientAdminForm(forms.ModelForm):
             '/media/js/jquery.synctranslit.js',
             )
 
-class ClientAdmin(admin.ModelAdmin):
+class ClientAdmin(AdminImageMixin,  admin.ModelAdmin):
     list_display = ('id','title','slug','order','is_published',)
     list_display_links = ('id','title','slug',)
     list_editable = ('order','is_published',)
@@ -48,24 +48,12 @@ admin.site.register(Client, ClientAdmin)
 class WorksMeidaInline(AdminImageMixin,admin.TabularInline):
     model = WorksMedia
 
-class WorkAdminForm(forms.ModelForm):
-    class Meta:
-        model = Work
-
-    class Media:
-        js = (
-            '/media/js/jquery.js',
-            '/media/js/clientadmin.js',
-            '/media/js/jquery.synctranslit.js',
-            )
-
-class WorkAdmin(admin.ModelAdmin):
-    list_display = ('id','title','slug','date_create','is_published',)
-    list_display_links = ('id','title','date_create','slug',)
+class WorkAdmin(AdminImageMixin, admin.ModelAdmin):
+    list_display = ('id','title','date_create','is_published',)
+    list_display_links = ('id','title','date_create',)
     list_editable = ('is_published',)
     list_filter = ('is_published','date_create',)
     search_fields = ('title','description',)
-    form = WorkAdminForm
     inlines = [
         WorksMeidaInline
     ]
