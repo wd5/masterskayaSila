@@ -2,4 +2,6 @@
     {% include load_template %}
     <input type="hidden" id="endrange" value="{{ endrange }}">
     <input type="hidden" id="remaining_count" value="{{ remaining_count }}">
+{% else %}
+    <input type="hidden" id="remaining_count" value="-1">
 {% endif %}

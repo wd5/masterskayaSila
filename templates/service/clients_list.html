@@ -10,6 +10,7 @@
 
         <input type="hidden" class="m_name" value="client">
         <input type="hidden" class="a_name" value="service">
+        <input type="hidden" class="template" value="clients">
         <input type="hidden" class="init_cnt" value="{{ clients.count }}">
 
         {% for client in clients %}
@@ -23,23 +24,7 @@
                 <div class="client_srvs">
                     <ul>
                         {% for category in client.get_works_categories %}
-                            <li>
-                                {% if category.workcategory == 4 %}
-                                    <a href="{{ client.get_absolute_url }}#video_examples"><img src="/media/img/video_zs.png" alt="" /></a>
-                                {% endif %}
-                                {% if category.workcategory == 5 %}
-                                    <a href="{{ client.get_absolute_url }}#design_examples"><img src="/media/img/design_zs.png" alt="" /></a>
-                                {% endif %}
-                                {% if category.workcategory == 2 %}
-                                    <a href="{{ client.get_absolute_url }}#foto_examples"><img src="/media/img/foto_zs.png" alt="" /></a>
-                                {% endif %}
-                                {% if category.workcategory == 1 %}
-                                    <a href="{{ client.get_absolute_url }}#out_adv_examples"><img src="/media/img/out_adv_zs.png" alt="" /></a>
-                                {% endif %}
-                                {% if category.workcategory == 3 %}
-                                    <a href="{{ client.get_absolute_url }}#smi_examples"><img src="/media/img/smi_zs.png" alt="" /></a>
-                                {% endif %}
-                            </li>
+                            <li><a href="{{ client.get_absolute_url }}#{% category_href category.id %}"><img src="{% category_pic category.id 'zs' %}" alt="" /></a></li>
                         {% endfor %}
                     </ul>
                 </div>

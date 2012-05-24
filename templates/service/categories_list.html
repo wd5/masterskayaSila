@@ -7,11 +7,7 @@
         {% for category in categories %}
             <div class="srv">
                 <a href="{{ category.get_absolute_url }}" class="srv_icon">
-                        <img src="{% if category.id == 4 %}/media/img/video_zm.png{% endif %}
-                        {% if category.id == 5 %}/media/img/design_zm.png{% endif %}
-                        {% if category.id == 2 %}/media/img/foto_zm.png{% endif %}
-                        {% if category.id == 1 %}/media/img/out_adv_zm.png{% endif %}
-                        {% if category.id == 3 %}/media/img/smi_zm.png{% endif %}" alt=""/>
+                        <img src="{% category_pic category.id 'zm' %}" alt=""/>
                 </a>
                 <div class="srv_def">
                     <a href="{{ category.get_absolute_url }}" class="srv_name">{{ category.title }}</a>

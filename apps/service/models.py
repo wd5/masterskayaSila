@@ -43,8 +43,11 @@ class WorkCategory(models.Model):
     def get_works_at_list(self):
         return self.work_set.published().filter(is_at_category_list=True)
 
-    def get_works(self):
+    def get_works_to_show(self):
         return self.work_set.published()[:self.works_count]
+
+    def get_works(self):
+        return self.work_set.published()
 
 def image_path_client(instance, filename):
     return os.path.join('images','clients', translify(filename).replace(' ', '_') )
@@ -79,7 +82,17 @@ class Client(models.Model):
         return self.work_set.published()
 
     def get_works_categories(self):
-        categories = self.work_set.values('workcategory').annotate()
+        works = self.get_works()
+        categories_id_list = works.distinct().values_list('workcategory', flat=True)
+        categories = WorkCategory.objects.published().filter(id__in=categories_id_list)
+        return categories
+
+    def get_works_categories_and_works(self):
+        categories = WorkCategory.objects.published()
+        for item in categories:
+            work = Work.objects.published().filter(client=self.id, workcategory = item)
+            if work:
+                setattr(item, 'works', work)
         return categories
 
 def image_path_works(instance, filename):

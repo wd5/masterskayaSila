@@ -1,0 +1,20 @@
+{% load pytils_numeral %}
+
+{% for item in items %}
+
+    {% for media in item.get_works_media %}
+        <div class="out_adv_example loaded" style="display: none;">
+            <div class="out_adv_example_img">
+                <img src="{{ media.get_src_image }}" alt="" />
+            </div>
+        </div>
+    {% endfor %}
+
+{% endfor %}
+
+{% if remaining_count %}
+    <input type="hidden" id="remaining_count_text" value="Ещё <span class='cnt'>{{ remaining_count }}</span> работ{{ remaining_count|choose_plural:"а,ы," }}">
+{% endif %}
+
+
+

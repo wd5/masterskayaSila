@@ -52,7 +52,7 @@ class WorkAdmin(AdminImageMixin, admin.ModelAdmin):
     list_display = ('id','title','date_create','is_published',)
     list_display_links = ('id','title','date_create',)
     list_editable = ('is_published',)
-    list_filter = ('is_published','date_create',)
+    list_filter = ('is_published','date_create','client',)
     search_fields = ('title','description',)
     inlines = [
         WorksMeidaInline

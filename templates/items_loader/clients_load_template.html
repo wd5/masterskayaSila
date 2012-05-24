@@ -1,0 +1,31 @@
+{% load pytils_numeral service_extras %}
+
+{% for item in items %}
+
+    <div class="client loaded" style="display: none;">
+        <a href="{{ item.get_absolute_url }}" class="client_icon"><img src="{{ item.get_src_image }}" alt="" /></a>
+        <div class="client_def">
+            <a href="{{ item.get_absolute_url }}" class="client_name">{{ item.title }}</a>
+            <p class="client_def_zm">{{ item.description|truncatewords:25 }}</p>
+        </div>
+
+        <div class="client_srvs">
+            <ul>
+                {% for category in item.get_works_categories %}
+                    <li><a href="{{ item.get_absolute_url }}#{% category_href category.id %}"><img src="{% category_pic category.id 'zs' %}" alt="" /></a></li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="cl"></div>
+    </div>
+
+{% endfor %}
+
+{% if remaining_count %}
+    <input type="hidden" id="remaining_count_text" value="Ещё <span class='cnt'>{{ remaining_count }}</span> запис{{ remaining_count|choose_plural:"ь,и,ей" }}">
+{% endif %}
+
+
+
+

@@ -11,11 +11,7 @@
 
 {% block left %}
     <div class="service_detail">
-        <span href="#" class="service_icon"><img src="{% if category.id == 4 %}/media/img/video_zm.png{% endif %}
-                                {% if category.id == 5 %}/media/img/design_zm.png{% endif %}
-                                {% if category.id == 2 %}/media/img/foto_zm.png{% endif %}
-                                {% if category.id == 1 %}/media/img/out_adv_zm.png{% endif %}
-                                {% if category.id == 3 %}/media/img/smi_zm.png{% endif %}" alt="" /></span>
+        <span href="#" class="service_icon"><img src="{% category_pic category.id 'zm' %}" alt="" /></span>
         <h1>{{ category.title }}</h1>
         <p class="service_def_zl">{{ category_descr_part1 }}</p>
         <div class="our_offer"><div class="our_offer_in">{{ category.additional_text }}</div></div>
@@ -26,71 +22,32 @@
 
         {% if category.id == 4 %}
             <div class="video_examples">
-            <div class="video_example">
-                <div class="video_example_img">
-                    <img src="/media/images/video1.jpg" alt="" />
-                    <a href="#" class="play_ic"></a>
-                </div>
-                <span class="video_example_title">Рекламный ролик для частного поселка «Чеховский»</span>
-            </div>
-            <div class="video_example">
-                <div class="video_example_img">
-                    <img src="/media/images/video1.jpg" alt="" />
-                    <a href="#" class="play_ic"></a>
-                </div>
-                <span class="video_example_title">Рекламный ролик для частного поселка «Чеховский»</span>
-            </div>
-            <div class="video_example">
-                <div class="video_example_img">
-                    <img src="/media/images/video1.jpg" alt="" />
-                    <a href="#" class="play_ic"></a>
-                </div>
-                <span class="video_example_title">Рекламный ролик для частного поселка «Чеховский»</span>
-            </div>
-            <div class="video_example">
-                <div class="video_example_img">
-                    <img src="/media/images/video1.jpg" alt="" />
-                    <a href="#" class="play_ic"></a>
-                </div>
-                <span class="video_example_title">Рекламный ролик для частного поселка «Чеховский»</span>
-            </div>
-            <div class="helper"></div>
-            <div class="show_more">
-                <a href="#">Ещё 12 работ</a>
-            </div>
-        </div><!-- /video_examples -->
-        {% endif %}
 
-        {% if category.id == 2 %}
-            <div class="foto_examples">
-            <div class="foto_example">
-                <div class="foto_example_img">
-                    <img src="/media/images/video1.jpg" alt="" />
-                    <a href="#" class="play_ic"></a>
-                </div>
-                <span class="foto_example_title">Рекламный ролик для частного поселка «Чеховский»</span>
-            </div>
-            <div class="helper"></div>
-            <div class="show_more">
-                <a href="#">Ещё 12 работ</a>
-            </div>
-        </div><!-- /foto_examples -->
-        {% endif %}
+                <input type="hidden" class="m_name" value="WorkCategory">
+                <input type="hidden" class="a_name" value="service">
+                <input type="hidden" class="template" value="video_example">
+                <input type="hidden" class="init_cnt" value="{{ category.get_works_to_show.count }}">
 
-        {% if category.id == 3 %}
-            <div class="smi_examples">
-            <div class="smi_example">
-                <div class="smi_example_img">
-                    <img src="/media/images/video1.jpg" alt="" />
-                    <a href="#" class="play_ic"></a>
+                <input type="hidden" class="add_parameter" value="4|get_works()">
+
+                {% for work in category.get_works_to_show %}
+                    {% for works_media in work.get_works_media %}
+                    <div class="video_example">
+                        <div class="video_example_img">
+                            <img src="{{ works_media.get_src_image }}" alt="" />
+                            <a href="{{ works_media.code_video }}" class="play_ic"></a>
+                        </div>
+                        <span class="video_example_title">{{ work.title }}</span>
+                    </div>
+                    {% endfor %}
+                    <div class="helper"></div>
+                {% endfor %}
+
+                <div class="show_more">
+                    <a href="#" class="load_items">Ещё <span class="cnt">2</span> работы</a>
                 </div>
-                <span class="smi_example_title">Рекламный ролик для частного поселка «Чеховский»</span>
-            </div>
-            <div class="helper"></div>
-            <div class="show_more">
-                <a href="#">Ещё 12 работ</a>
-            </div>
-        </div><!-- /smi_examples -->
+
+            </div><!-- /video_examples -->
         {% endif %}
 
     </div><!-- /service_detail -->
@@ -109,14 +66,18 @@
 
 {% block post_right %}
 
-    {% if category.id == 1 %}
+    {% if category.id != 4 %}
         <div class="out_adv_examples">
 
-            <input type="hidden" class="m_name" value="work">
+            <input type="hidden" class="m_name" value="WorkCategory">
             <input type="hidden" class="a_name" value="service">
-            <input type="hidden" class="init_cnt" value="{{ category.get_works.count }}">
+            <input type="hidden" class="template" value="outadv">
 
-            {% for work in category.get_works %}
+            <input type="hidden" class="add_parameter" value="{{ category.id }}|get_works()">
+
+            <input type="hidden" class="init_cnt" value="{{ category.get_works_to_show.count }}">
+
+            {% for work in category.get_works_to_show %}
                 <div class="out_adv_example">
                     <h1 class="out_adv_example_title">{{ work.title }}</h1>
                     <div class="out_adv_example_img">
@@ -132,21 +93,6 @@
             </div>
 
         </div><!-- /out_adv_examples -->
-
-    {% endif %}
-
-    {% if category.id == 5 %}
-        <div class="design_examples">
-            <div class="design_example">
-                <h1 class="design_example_title">Серия билбордов для продуктовой сети «Парус»</h1>
-                <div class="design_example_img">
-                    <img src="/media/images/out_adv1.png" alt="Серия билбордов для продуктовой сети «Парус»" />
-                </div>
-            </div>
-            <div class="show_more">
-                <a href="#">Ещё 12 работ</a>
-            </div>
-        </div><!-- /design_examples -->
     {% endif %}
 
     {% block_clients %}

@@ -10,7 +10,9 @@ $(function() {
                 init_cnt: parent.find('.init_cnt').val(),
                 //init_cnt: parent.find('.l_item').length,
                 m_name: parent.find('.m_name').val(),
-                a_name: parent.find('.a_name').val()
+                a_name: parent.find('.a_name').val(),
+                template: parent.find('.template').val(),
+                add_parameter: parent.find('.add_parameter').val()
             },
             type: "POST",
             success: function(data) {
