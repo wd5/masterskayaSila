@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% load thumbnail service_extras siteblocks_extras %}
+
+{% block title %}
+    Ошибка при авторизации
+{% endblock %}
+
+{% block left %}
+    {% if form.errors %}
+        Произошла ошибка при авторизации. Проверьте данные вводимые в форму авторизации.
+        <script type="text/javascript">
+            $(function(){
+                $('#login_lnk').click();
+            });
+        </script>
+    {% endif %}
+{% endblock %}
+
+{% block col_right_type %}cols5 with_ring{% endblock %}
+
+{% block right %}
+    {% block_adv_maintenance 'small' %}
+{% endblock %}
+
+{% block post_right %}
+    {% block_clients %}
+{% endblock %}
+
+

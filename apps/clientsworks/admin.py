@@ -5,7 +5,7 @@ from apps.clientsworks.models import ClientsWork,ClientsWorkCategory,Document,Do
 from apps.utils.widgets import Redactor,AdminImageWidget
 from sorl.thumbnail.admin import AdminImageMixin
 
-class ClientsWorkCategoryAdmin(admin.ModelAdmin):
+class ClientsWorkCategoryAdmin(AdminImageMixin,admin.ModelAdmin):
     list_display = ('id','title','order','is_published',)
     list_display_links = ('id','title',)
     list_editable = ('order','is_published',)
@@ -23,8 +23,19 @@ admin.site.register(DocumentsCategory, DocumentsCategoryAdmin)
 class DocumentInline(AdminImageMixin,admin.TabularInline):
     model = Document
 
+class ClientsWorkForm(forms.ModelForm):
+    class Meta:
+        model = ClientsWork
+
+    class Media:
+        js = (
+            '/media/js/jquery.js',
+            '/media/js/clientwork_hidetextarea.js'
+            )
+
 class ClientsWorkInline(AdminImageMixin,admin.TabularInline):
     model = ClientsWork
+    form = ClientsWorkForm
 
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ('id','user','order','is_published',)

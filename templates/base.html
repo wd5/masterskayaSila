@@ -51,7 +51,14 @@
                 <div class="corners corner_topleft"></div>
                 <div class="corners corner_bottomright"></div>
             </div><!--/contacts-->
-            <div class="login_lnk"><a href="#" id="login_lnk">вход для клиента</a><span class="corners corner_left"></span><span class="corners corner_right"></span></div>
+            <div class="login_lnk {% if user.is_authenticated and not user.is_staff %}enter{% endif %}">
+                {% if user.is_authenticated and not user.is_staff %}
+                    <a href="/cabinet/">{{ user.first_name }}</a>
+                {% else %}
+                    <a href="#" id="login_lnk">вход для клиента</a>
+                {% endif %}
+                <span class="corners corner_left"></span><span class="corners corner_right"></span>
+            </div>
         </div>
         <!--/HEADER-->
 
@@ -102,15 +109,16 @@
 
     <div class="bot_hg"></div>
 
-    {% block overlay %}
-
+    {% if user.is_authenticated %}
+    
+    {% else %}
         <div class="overlay">
         	<div class="overlay_in">
         		<div class="login">
-        			<form action="/cabinet/login/" method="post" class="login_form">
+        			<form action="{% url auth_login %}?next={{ next_url }}" method="post" class="login_form">
         				<h1>Вход для клиента</h1>
-        				<div class="input"><label>Логин<input type="text" name="" /></label></div>
-        				<div class="input"><label>Пароль<input type="password" name="" /></label></div>
+        				<div class="input"><label>Логин{{ form.username }}{{ form.username.errors }}</label></div>
+        				<div class="input"><label>Пароль{{ form.password }}{{ form.password.errors }}</label></div>
         				<div class="submit">
         					<div><input type="submit" value="Войти" /></div>
         				</div>
@@ -119,8 +127,7 @@
         		</div><!-- /login -->
         	</div><!-- /overlay_in -->
         </div><!-- /overlay -->
-
-    {% endblock %}
+    {% endif %}
 
 </body>
 </html>

@@ -29,7 +29,10 @@ class ClientsWorkCategory(models.Model):
         verbose_name_plural = _(u'client_categories')
 
     def get_src_image(self):
-        return self.image.url
+        if self.image:
+            return self.image.url
+        else:
+            return False
 
     def get_works(self):
         return self.clientswork_set.published()
@@ -38,7 +41,7 @@ def image_path_client(instance, filename):
     return os.path.join('images','clients', translify(filename).replace(' ', '_') )
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, verbose_name=u'пользователь')
+    user = models.OneToOneField(User, verbose_name=u'пользователь', unique=True)
     order = models.IntegerField(u'порядок сортировки', help_text=u'Чем больше число, тем выше располагается элемент', default=10)
     is_published = models.BooleanField(verbose_name=u'опубликовано', default=True)
 
@@ -55,8 +58,27 @@ class Profile(models.Model):
     def get_works(self):
         return self.clientswork_set.published()
 
+    def get_new_works(self):
+        return self.clientswork_set.published().filter(is_new=True)
+
+    def get_works_categories_and_works(self):
+        categories = ClientsWorkCategory.objects.published()
+        for item in categories:
+            work = ClientsWork.objects.published().filter(profile=self.id, workcategory = item)[:5]
+            if work:
+                setattr(item, 'works', work)
+        return categories
+
     def get_documents(self):
-            return self.document_set.published()
+        return self.document_set.published()
+
+    def get_documents_categories_and_docs(self):
+        categories = DocumentsCategory.objects.published()
+        for item in categories:
+            docs = Document.objects.published().filter(profile=self.id, category = item)[:3]
+            if docs:
+                setattr(item, 'docs', docs)
+        return categories
 
 def image_path_ClientMedia(instance, filename):
     return os.path.join('images','clientWorksMedia', translify(filename).replace(' ', '_') )
@@ -99,6 +121,9 @@ class DocumentsCategory(models.Model):
         ordering = ['-order']
         verbose_name = _(u'documents_category')
         verbose_name_plural = _(u'documents_categories')
+
+    def get_docs(self):
+        return self.document_set.published()
 
 class Document(models.Model):
     profile = models.ForeignKey(Profile, verbose_name=u'профиль клиента')

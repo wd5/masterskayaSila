@@ -21,7 +21,7 @@
         <!--[if gte IE 8]><div class="cl"></div><![endif]-->
 
         {% if category.id == 4 %}
-            <div class="video_examples">
+            <div class="video_examples load_block">
 
                 <input type="hidden" class="m_name" value="WorkCategory">
                 <input type="hidden" class="a_name" value="service">
@@ -43,7 +43,7 @@
                     <div class="helper"></div>
                 {% endfor %}
 
-                <div class="show_more">
+                <div class="show_more service_load_button">
                     <a href="#" class="load_items">Ещё <span class="cnt">2</span> работы</a>
                 </div>
 
@@ -67,7 +67,7 @@
 {% block post_right %}
 
     {% if category.id != 4 %}
-        <div class="out_adv_examples">
+        <div class="out_adv_examples load_block">
 
             <input type="hidden" class="m_name" value="WorkCategory">
             <input type="hidden" class="a_name" value="service">
@@ -88,7 +88,7 @@
                 </div>
             {% endfor %}
 
-            <div class="show_more">
+            <div class="show_more service_load_button">
                 <a href="#" class="load_items">Ещё <span class="cnt">2</span> работы</a>
             </div>
 

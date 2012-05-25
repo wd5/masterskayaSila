@@ -31,7 +31,7 @@ $(function(){
 
 
 
-    $(".play_ic").live('click',function(){
+    $(".play_ic, .play_ic_zs").live('click',function(){
         $.fancybox({
                 'padding'		: 0,
                 'autoScale'		: false,

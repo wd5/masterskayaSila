@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+
+{% load thumbnail service_extras siteblocks_extras %}
+
+{% block title %}
+    Кабинет клиента
+{% endblock %}
+
+{% block left %}
+    {% comment %} <form action="{% url auth_logout %}">
+        <input type="submit" value="выход">
+    </form>{% endcomment %}
+
+    <div class="cabinet">
+        <h1>Кабинет клиента</h1>
+
+        {% if profile %}
+            {% if profile.get_new_works %}
+                <div class="works_new">
+                    <h2>Новые работы</h2>
+                    {% for work in profile.get_new_works %}
+                        {% if work.workcategory.id == 4 %}
+                            <div class="new_video">
+                                <div class="new_video_img">
+                                    {% thumbnail work.image "201x123" crop="center" as im %}
+                                        <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" />
+                                    {% endthumbnail %}
+                                    <a href="{{ work.code_video }}" class="play_ic"></a>
+                                </div>
+                                <span class="new_video_title_short">{{ work.title }}</span>
+                            </div>
+                        {% else %}
+                            <div class="new_out_adv">
+                                <div class="new_out_adv_img">
+                                    {% thumbnail work.image "297x148" crop="center" as im %}
+                                        <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" />
+                                    {% endthumbnail %}
+                                </div>
+                                <span class="new_out_adv_title">{{ work.title }}</span>
+                            </div>
+                        {% endif %}
+
+                    {% endfor %}
+                </div><!-- /new_works -->
+            {% endif %}
+            {% for category in profile.get_works_categories_and_works %}
+                {% if category.works %}
+
+                    <div class="work_group">
+                        {% if category.get_src_image %}<img src="{{ category.get_src_image }}" alt="" />{% endif %}
+                        <span class="work_group_title">{{ category.title }}</span>
+                    </div>
+
+                    <div class="works_all load_block">
+
+                        <input type="hidden" class="m_name" value="ClientsWorkCategory">
+                        <input type="hidden" class="a_name" value="clientsworks">
+                        <input type="hidden" class="template" value="clientwork">
+                        <input type="hidden" class="init_cnt" value="{{ category.works.count }}">
+
+                        <input type="hidden" class="add_parameter" value="{{ category.id }}|get_works().filter(profile='{{ profile.id }}')">
+
+                        {% for work in category.works %}
+                            {% if category.id == 4 %}
+                                <div class="work_video">
+                                    <div class="work_video_img">
+                                        {% thumbnail work.image "115x70" crop="center" as im %}
+                                            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" />
+                                        {% endthumbnail %}
+                                        <a href="{{ work.code_video }}" class="play_ic_zs"></a>
+                                    </div>
+                                    <span class="work_video_title_short">{{ work.title }}</span>
+                                </div>
+                            {% else %}
+                                <div class="work_out_adv">
+                                    <div class="work_out_adv_img">
+                                        {% thumbnail work.image "115x70" crop="center" as im %}
+                                            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" />
+                                        {% endthumbnail %}
+                                    </div>
+                                    <span class="work_out_adv_title_short">{{ work.title }}</span>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+
+                        <div class="works_show_more service_load_button">
+                            <div class="show_more">
+                                <a href="#" class="load_items">Ещё <span class="cnt">3</span></a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                {% endif %}
+            {% endfor %}
+
+        {% else %}
+            Для данного пользователя не создан профиль.
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block right %}
+    {% if profile %}
+    <div class="blk_out yelow_fr">
+        <div class="blk">
+            <h2>Документы</h2>
+
+            <div class="docs">
+
+                {% for doc_category in profile.get_documents_categories_and_docs %}
+                    {% if doc_category.docs %}
+                        <div class="docs_group load_block">
+                            <div class="docs_group_name">{{ doc_category.title }}<div class="docs_group_r"></div></div>
+
+                            <input type="hidden" class="m_name" value="DocumentsCategory">
+                            <input type="hidden" class="a_name" value="clientsworks">
+                            <input type="hidden" class="template" value="clientdoc">
+                            <input type="hidden" class="init_cnt" value="{{ doc_category.docs.count }}">
+
+                            <input type="hidden" class="add_parameter" value="{{ doc_category.id }}|get_docs().filter(profile='{{ profile.id }}')">
+
+
+                            {% for doc in doc_category.docs %}
+                                <div class="doc">
+                                    <a href="{{ doc.get_file_path }}" class="doc_lnk">{{ doc.title }}</a>
+                                    <span class="doc_date">{{ doc.date_create|date:"j E" }}</span>
+                                </div>
+                            {% endfor %}
+
+                            <a href="#" class="doc_show_more load_items service_load_button">ещё <span class="cnt">2</span> документа</a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+            </div>
+
+        </div>
+    </div><!-- /blk -->
+    {% endif %}
+{% endblock %}

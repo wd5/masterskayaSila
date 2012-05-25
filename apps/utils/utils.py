@@ -11,7 +11,6 @@ from django.db.models.loading import get_model
 from django.shortcuts import render_to_response
 from django.template.loader import render_to_string
 from django.views.generic import View
-from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseRedirect
 import settings
 #from apps.siteblocks.models import Settings
 

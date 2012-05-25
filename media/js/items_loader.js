@@ -2,7 +2,7 @@ $(function() {
 
     $('.load_items').live('click',function(){
         var el = $(this);
-        var parent = $(this).parent().parent();
+        var parent = $(this).parents('.load_block');
         $.ajax({
             url: "/load_items/",
             data: {
@@ -18,14 +18,12 @@ $(function() {
             success: function(data) {
 
                 parent.append(data)
-
-
-                parent.find('.loaded:eq(0)').fadeIn("fast", function (){
+                parent.find('.loaded:eq(0)').fadeIn("fast", function (){ //появление по очереди
                         $(this).next().fadeIn("fast", arguments.callee);
                     });
-                //parent.find('.loaded').fadeIn('slow')
+                //parent.find('.loaded').fadeIn('slow')  //простое появление
                 parent.find('div').removeClass('loaded')
-                parent.find('div.show_more').appendTo(parent)
+                parent.find('.service_load_button').appendTo(parent)
                 parent.find('.init_cnt').val(parent.find('#endrange').val())
                 parent.find('#endrange').remove()
                 var rctxt = parent.find('#remaining_count_text').val()
@@ -33,7 +31,7 @@ $(function() {
                 if (rctxt!=undefined)
                     {el.html(rctxt)}
                 if (rc<=0)
-                    {el.parent().remove()}
+                    {parent.find('.service_load_button').remove()}
                 parent.find('#remaining_count_text').remove()
                 parent.find('#remaining_count').remove()
 

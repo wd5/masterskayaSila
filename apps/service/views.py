@@ -3,8 +3,6 @@ from django.views.generic import ListView, DetailView
 from apps.service.models import WorkCategory,Client
 from apps.siteblocks.models import Blog
 
-show_client = True
-
 class ShowCategoriesView(ListView):
     model = WorkCategory
     template_name = 'service/categories_list.html'
