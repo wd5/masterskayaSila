@@ -2,7 +2,7 @@
 
 {% for item in items %}
 
-    <div class="out_adv_example loaded" style="display: none;">
+    <div class="out_adv_example{% if not initial %} loaded" style="display: none;{% endif %}">
         <h1 class="out_adv_example_title">{{ item.title }}</h1>
         <div class="out_adv_example_img">
             {% for works_media in item.get_works_media %}

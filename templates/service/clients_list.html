@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load thumbnail service_extras siteblocks_extras %}
+{% load thumbnail items_loader_extras service_extras siteblocks_extras %}
 
 {% block title %}Наши клиенты{% endblock %}
 
@@ -8,30 +8,7 @@
     <div class="clients load_block">
         <h1>Наши клиенты</h1>
 
-        <input type="hidden" class="m_name" value="client">
-        <input type="hidden" class="a_name" value="service">
-        <input type="hidden" class="template" value="clients">
-        <input type="hidden" class="init_cnt" value="{{ clients.count }}">
-
-        {% for client in clients %}
-            <div class="client">
-                <a href="{{ client.get_absolute_url }}" class="client_icon"><img src="{{ client.get_src_image }}" alt="" /></a>
-                <div class="client_def">
-                    <a href="{{ client.get_absolute_url }}" class="client_name">{{ client.title }}</a>
-                    <p class="client_def_zm">{{ client.description|truncatewords:25 }}</p>
-                </div>
-
-                <div class="client_srvs">
-                    <ul>
-                        {% for category in client.get_works_categories %}
-                            <li><a href="{{ client.get_absolute_url }}#{% category_href category.id %}"><img src="{% category_pic category.id 'zs' %}" alt="" /></a></li>
-                        {% endfor %}
-                    </ul>
-                </div>
-
-                <div class="cl"></div>
-            </div>
-        {% endfor %}
+        {% block_items_loader clients "client" "service" "clients" "" "" %}
 
         <div class="show_more service_load_button">
             <a href="#" class="load_items">Ещё <span class="cnt">3</span> клиента</a>

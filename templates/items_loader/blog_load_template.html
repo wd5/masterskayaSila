@@ -2,7 +2,7 @@
 
 {% for item in items %}
 
-    <div class="blog_item loaded" style="display: none;">
+    <div class="blog_item{% if not initial %} loaded" style="display: none;{% endif %}">
         <a href="{{ item.get_absolute_url }}" class="blog_item_icon"><img src="{{ item.get_src_image }}" alt="" /></a>
         <div class="blog_item_def">
             <a href="{{ item.get_absolute_url }}" class="blog_item_lnk">{{ item.title }}</a>

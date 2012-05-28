@@ -3,7 +3,7 @@
 {% for item in items %}
 
     {% for works_media in item.get_works_media %}
-        <div class="video_example">
+        <div class="video_example{% if not initial %} loaded" style="display: none;{% endif %}">
             <div class="video_example_img">
                 <img src="{{ works_media.get_src_image }}" alt="" />
                 <a href="{{ works_media.code_video }}" class="play_ic"></a>

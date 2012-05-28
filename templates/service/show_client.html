@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load thumbnail service_extras siteblocks_extras %}
+{% load thumbnail items_loader_extras service_extras siteblocks_extras %}
 
 {% block title %}{{ client.title }} &mdash; Наши клиенты{% endblock %}
 
@@ -127,22 +127,13 @@
                         <span class="work_group_title">Билборды и рекламная компания</span>
                     </div>
 
-                    <input type="hidden" class="m_name" value="WorkCategory">
-                    <input type="hidden" class="a_name" value="service">
-                    <input type="hidden" class="template" value="outadv_cl">
-                    <input type="hidden" class="init_cnt" value="{{ category.works.count }}">
-
-                    <input type="hidden" class="add_parameter" value="{{ category.id }}|get_works().filter(client='{{ client.id }}')">
-
-                    {% for work in category.works %}
-                        {% for media in work.get_works_media %}
-                            <div class="out_adv_example">
-                                <div class="out_adv_example_img">
-                                    <img src="{{ media.get_src_image }}" alt="" />
-                                </div>
-                            </div>
-                        {% endfor %}
-                    {% endfor %}
+                    {% block_items_loader category.works "WorkCategory" "service" "outadv_cl" category.id "get_works().filter(client='2')" %}
+                            {% comment %}
+                            здесь мне нужно передавать ид клиента которого мы открыли - get_works().filter(client='{{ client.id }}')
+                             раньше я вставлял инпут:
+                             <input type="hidden" class="add_parameter" value="{{ category.id }}|get_works().filter(client='{{ client.id }}')">
+                              сейчас инпут вставляется в шаблоне.
+                             {% endcomment %}
 
                     <div class="show_more service_load_button">
                         <a href="#" class="load_items">Ещё <span class="cnt">2</span> работы</a>

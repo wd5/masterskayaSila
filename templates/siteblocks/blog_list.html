@@ -1,26 +1,13 @@
 {% extends "base.html" %}
 
-{% load thumbnail service_extras siteblocks_extras %}
+{% load thumbnail items_loader_extras service_extras siteblocks_extras %}
 
 {% block title %}Блог{% endblock %}
 
 {% block left %}
     <div class="blog load_block">
 
-        <input type="hidden" class="m_name" value="blog">
-        <input type="hidden" class="a_name" value="siteblocks">
-        <input type="hidden" class="template" value="blog">
-        <input type="hidden" class="init_cnt" value="{{ blog.count }}">
-
-        {% for item in blog %}
-            <div class="blog_item">
-                <a href="{{ item.get_absolute_url }}" class="blog_item_icon"><img src="{{ item.get_src_image }}" alt="" /></a>
-                <div class="blog_item_def">
-                    <a href="{{ item.get_absolute_url }}" class="blog_item_lnk">{{ item.title }}</a>
-                    <p class="blog_item_def_zm">{{ item.short_description }}</p>
-                </div>
-            </div>
-        {% endfor %}
+        {% block_items_loader blog "blog" "siteblocks" "blog" "" "" %}
 
         <div class="show_more service_load_button">
             <a href="#" class="load_items">Ещё <span class="cnt">4</span> записи</a>

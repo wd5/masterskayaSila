@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load thumbnail service_extras siteblocks_extras %}
+{% load thumbnail items_loader_extras service_extras siteblocks_extras %}
 
 {% block title %}
     {{ category.title }}
@@ -23,25 +23,7 @@
         {% if category.id == 4 %}
             <div class="video_examples load_block">
 
-                <input type="hidden" class="m_name" value="WorkCategory">
-                <input type="hidden" class="a_name" value="service">
-                <input type="hidden" class="template" value="video_example">
-                <input type="hidden" class="init_cnt" value="{{ category.get_works_to_show.count }}">
-
-                <input type="hidden" class="add_parameter" value="4|get_works()">
-
-                {% for work in category.get_works_to_show %}
-                    {% for works_media in work.get_works_media %}
-                    <div class="video_example">
-                        <div class="video_example_img">
-                            <img src="{{ works_media.get_src_image }}" alt="" />
-                            <a href="{{ works_media.code_video }}" class="play_ic"></a>
-                        </div>
-                        <span class="video_example_title">{{ work.title }}</span>
-                    </div>
-                    {% endfor %}
-                    <div class="helper"></div>
-                {% endfor %}
+                {% block_items_loader category.get_works_to_show "WorkCategory" "service" "video_example" category.id "get_works()" %}
 
                 <div class="show_more service_load_button">
                     <a href="#" class="load_items">Ещё <span class="cnt">2</span> работы</a>
@@ -69,24 +51,7 @@
     {% if category.id != 4 %}
         <div class="out_adv_examples load_block">
 
-            <input type="hidden" class="m_name" value="WorkCategory">
-            <input type="hidden" class="a_name" value="service">
-            <input type="hidden" class="template" value="outadv">
-
-            <input type="hidden" class="add_parameter" value="{{ category.id }}|get_works()">
-
-            <input type="hidden" class="init_cnt" value="{{ category.get_works_to_show.count }}">
-
-            {% for work in category.get_works_to_show %}
-                <div class="out_adv_example">
-                    <h1 class="out_adv_example_title">{{ work.title }}</h1>
-                    <div class="out_adv_example_img">
-                        {% for works_media in work.get_works_media %}
-                            <img src="{{ works_media.get_src_image }}" alt="{{ work.title }}" />
-                        {% endfor %}
-                    </div>
-                </div>
-            {% endfor %}
+            {% block_items_loader category.get_works_to_show "WorkCategory" "service" "outadv" category.id "get_works()" %}
 
             <div class="show_more service_load_button">
                 <a href="#" class="load_items">Ещё <span class="cnt">2</span> работы</a>

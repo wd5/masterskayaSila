@@ -3,7 +3,7 @@
 {% for item in items %}
 
     {% for media in item.get_works_media %}
-        <div class="out_adv_example loaded" style="display: none;">
+        <div class="out_adv_example{% if not initial %} loaded" style="display: none;{% endif %}">
             <div class="out_adv_example_img">
                 <img src="{{ media.get_src_image }}" alt="" />
             </div>

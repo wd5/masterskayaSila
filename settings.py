@@ -19,6 +19,8 @@ INSTALLED_APPS += (
     'apps.service',
     'apps.clientsworks',
 
+    'apps.utils.items_loader',
+
     'sorl.thumbnail',
     #'south',
     #'captcha',

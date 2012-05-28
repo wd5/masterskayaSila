@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-from django.conf.urls.defaults import patterns, include, url
+from django.conf.urls.defaults import patterns, url
 
 #from apps.app.urls import urlpatterns as app_url
 from django.views.decorators.csrf import csrf_exempt
 
 from views import index
-from apps.utils.utils import items_loader
+from apps.utils.items_loader.views import items_loader
 from apps.service.views import show_work_category,show_client
 from apps.siteblocks.views import show_blog_item
 from apps.clientsworks.views import show_cabinet
