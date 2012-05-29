@@ -13,6 +13,7 @@
 
         {% for category in client.get_works_categories_and_works %}
             {% if category.works %}
+
                 {% if category.id == 4 %}
                     <div class="video_examples" id="video_examples">
                         <div class="work_group">
@@ -26,7 +27,6 @@
                                     <div class="video_example_img">
                                         <img src="{{ media.get_src_image }}" alt="" />
                                         <a href="{{ media.code_video }}" class="play_ic"></a>
-                                        {% comment %}<div class="play_ic"></div>{% endcomment %}
                                     </div>
                                     <span class="video_example_title">{{ work.title }}</span>
                                 </div>
@@ -40,45 +40,6 @@
                     </div><!-- /video_examples -->
                 {% endif %}
 
-                {% if category.id == 2 %}
-                    <div class="foto_examples" id="foto_examples">
-                        <div class="work_group">
-                            <img src="/media/img/foto_zs.png" alt="" />
-                            <span class="work_group_title">Фотосъемка</span>
-                        </div>
-                        <div class="foto_example">
-                            <div class="foto_example_img">
-                                <img src="/media/images/video1.jpg" alt="" />
-                                <div class="play_ic"></div>
-                            </div>
-                            <span class="foto_example_title">Рекламный ролик для частного поселка «Чеховский»</span>
-                        </div>
-                        <div class="helper"></div>
-                        <div class="show_more">
-                            <a href="#">Ещё 12 работ</a>
-                        </div>
-                    </div><!-- /foto_examples -->
-                {% endif %}
-
-                {% if category.id == 3 %}
-                    <div class="smi_examples" id="smi_examples">
-                        <div class="work_group">
-                            <img src="/media/img/smi_zs.png" alt="" />
-                            <span class="work_group_title">СМИ</span>
-                        </div>
-                        <div class="smi_example">
-                            <div class="smi_example_img">
-                                <img src="/media/images/video1.jpg" alt="" />
-                                <div class="play_ic"></div>
-                            </div>
-                            <span class="smi_example_title">Рекламный ролик для частного поселка «Чеховский»</span>
-                        </div>
-                        <div class="helper"></div>
-                        <div class="show_more">
-                            <a href="#">Ещё 12 работ</a>
-                        </div>
-                    </div><!-- /smi_examples -->
-                {% endif %}
             {% endif %}
         {% endfor %}
 
@@ -97,25 +58,50 @@
 
         {% if category.works %}
 
+            {% if category.id == 2 %}
+                <div class="out_adv_examples load_block" id="foto_examples">
+                    <div class="work_group">
+                        <img src="/media/img/foto_zs.png" alt="" />
+                        <span class="work_group_title">Фотосъемка</span>
+                    </div>
+
+                    <input type="hidden" class="add_parameter" value="{{ category.id }}|get_works().filter(client='{{ client.id }}')">
+                    {% block_items_loader category.works "WorkCategory" "service" "outadv_cl" "" "" %}
+
+                    <div class="show_more service_load_button">
+                        <a href="#" class="load_items">Ещё <span class="cnt">2</span> работы</a>
+                    </div>
+                </div><!-- /foto_examples -->
+            {% endif %}
+
+            {% if category.id == 3 %}
+                <div class="out_adv_examples load_block" id="smi_examples">
+                    <div class="work_group">
+                        <img src="/media/img/smi_zs.png" alt="" />
+                        <span class="work_group_title">СМИ</span>
+                    </div>
+
+                    <input type="hidden" class="add_parameter" value="{{ category.id }}|get_works().filter(client='{{ client.id }}')">
+                    {% block_items_loader category.works "WorkCategory" "service" "outadv_cl" "" "" %}
+
+                    <div class="show_more service_load_button">
+                        <a href="#" class="load_items">Ещё <span class="cnt">2</span> работы</a>
+                    </div>
+                </div><!-- /smi_examples -->
+            {% endif %}
+
             {% if category.id == 5 %}
-                <div class="design_examples" id="design_examples">
+                <div class="out_adv_examples load_block" id="design_examples">
                     <div class="work_group">
                         <img src="/media/img/design_zs.png" alt="" />
                         <span class="work_group_title">Дизайн</span>
                     </div>
 
-                    {% for work in category.works %}
-                    <div class="design_example">
-                        {% for media in work.get_works_media %}
-                            <div class="design_example_img">
-                                <img src="{{ media.get_src_image }}" alt="" />
-                            </div>
-                        {% endfor %}
-                    </div>
-                    {% endfor %}
+                    <input type="hidden" class="add_parameter" value="{{ category.id }}|get_works().filter(client='{{ client.id }}')">
+                    {% block_items_loader category.works "WorkCategory" "service" "outadv_cl" "" "" %}
 
-                    <div class="show_more">
-                        <a href="#">Ещё 12 работ</a>
+                    <div class="show_more service_load_button">
+                        <a href="#" class="load_items">Ещё <span class="cnt">2</span> работы</a>
                     </div>
                 </div><!-- /design_examples -->
             {% endif %}
@@ -127,13 +113,8 @@
                         <span class="work_group_title">Билборды и рекламная компания</span>
                     </div>
 
-                    {% block_items_loader category.works "WorkCategory" "service" "outadv_cl" category.id "get_works().filter(client='2')" %}
-                            {% comment %}
-                            здесь мне нужно передавать ид клиента которого мы открыли - get_works().filter(client='{{ client.id }}')
-                             раньше я вставлял инпут:
-                             <input type="hidden" class="add_parameter" value="{{ category.id }}|get_works().filter(client='{{ client.id }}')">
-                              сейчас инпут вставляется в шаблоне.
-                             {% endcomment %}
+                    <input type="hidden" class="add_parameter" value="{{ category.id }}|get_works().filter(client='{{ client.id }}')">
+                    {% block_items_loader category.works "WorkCategory" "service" "outadv_cl" "" "" %}
 
                     <div class="show_more service_load_button">
                         <a href="#" class="load_items">Ещё <span class="cnt">2</span> работы</a>

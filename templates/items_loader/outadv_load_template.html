@@ -4,11 +4,12 @@
 
     <div class="out_adv_example{% if not initial %} loaded" style="display: none;{% endif %}">
         <h1 class="out_adv_example_title">{{ item.title }}</h1>
-        <div class="out_adv_example_img">
+        <ul class="flip">
             {% for works_media in item.get_works_media %}
-                <img src="{{ works_media.get_src_image }}" alt="{{ item.title }}" />
+                <li><img src="{{ works_media.get_src_image }}" alt="{{ item.title }}" /></li>
             {% endfor %}
-        </div>
+        </ul>
+    <script type="text/javascript">SetJcoverFlip();</script>
     </div>
 
 {% endfor %}

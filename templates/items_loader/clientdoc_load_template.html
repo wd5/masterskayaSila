@@ -1,7 +1,7 @@
 {% load pytils_numeral service_extras thumbnail %}
 
 {% for item in items %}
-        <div class="doc">
+        <div class="doc{% if not initial %} loaded" style="display: none;{% endif %}">
             <a href="{{ item.get_file_path }}" class="doc_lnk">{{ item.title }}</a>
             <span class="doc_date">{{ item.date_create|date:"j E" }}</span>
         </div>

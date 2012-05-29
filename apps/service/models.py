@@ -90,7 +90,7 @@ class Client(models.Model):
     def get_works_categories_and_works(self):
         categories = WorkCategory.objects.published()
         for item in categories:
-            work = Work.objects.published().filter(client=self.id, workcategory = item)
+            work = Work.objects.published().filter(client=self.id, workcategory = item)[:1]
             if work:
                 setattr(item, 'works', work)
         return categories

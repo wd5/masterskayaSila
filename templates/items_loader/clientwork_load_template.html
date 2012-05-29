@@ -3,7 +3,7 @@
 {% for item in items %}
 
     {% if item.workcategory.id == 4 %}
-        <div class="work_video loaded" style="display: none;">
+        <div class="work_video{% if not initial %} loaded" style="display: none;{% endif %}">
             <div class="work_video_img">
                 {% thumbnail item.image "115x70" crop="center" as im %}
                     <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" />
@@ -13,7 +13,7 @@
             <span class="work_video_title_short">{{ item.title }}</span>
         </div>
     {% else %}
-        <div class="work_out_adv loaded" style="display: none;">
+        <div class="work_out_adv{% if not initial %} loaded" style="display: none;{% endif %}">
             <div class="work_out_adv_img">
                 {% thumbnail item.image "115x70" crop="center" as im %}
                     <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" />

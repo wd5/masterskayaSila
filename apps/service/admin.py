@@ -45,14 +45,25 @@ class ClientAdmin(AdminImageMixin,  admin.ModelAdmin):
     form = ClientAdminForm
 admin.site.register(Client, ClientAdmin)
 
+class WorkForm(forms.ModelForm):
+    class Meta:
+        model = Work
+
+    class Media:
+        js = (
+            '/media/js/jquery.js',
+            '/media/js/work_hidetextarea.js'
+            )
+
 class WorksMeidaInline(AdminImageMixin,admin.TabularInline):
     model = WorksMedia
+    form = WorkForm
 
 class WorkAdmin(AdminImageMixin, admin.ModelAdmin):
     list_display = ('id','title','date_create','is_published',)
     list_display_links = ('id','title','date_create',)
     list_editable = ('is_published',)
-    list_filter = ('is_published','date_create','client',)
+    list_filter = ('is_published','date_create','client','workcategory',)
     search_fields = ('title','description',)
     inlines = [
         WorksMeidaInline
