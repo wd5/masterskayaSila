@@ -1,0 +1,23 @@
+{% load pytils_numeral %}
+
+{% for item in items %}
+
+    {% for media in item.get_works_media %}
+        <div class="video_example{% if not initial %} loaded" style="display: none;{% endif %}">
+            <div class="video_example_img">
+                <img src="{{ media.get_src_image }}" alt="" />
+                <a href="{{ media.code_video }}" class="play_ic"></a>
+            </div>
+            <span class="video_example_title">{{ item.title }}</span>
+        </div>
+    {% endfor %}
+    <div class="helper"></div>
+
+{% endfor %}
+
+{% if remaining_count %}
+    <input type="hidden" id="remaining_count_text" value="Ещё <span class='cnt'>{{ remaining_count }}</span> работ{{ remaining_count|choose_plural:"а,ы," }}">
+{% endif %}
+
+
+
