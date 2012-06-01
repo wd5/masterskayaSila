@@ -7,7 +7,6 @@
 {% block left %}
     <div class="text">
         <h1>{{ blog_item.title }}</h1>
-        <img src="{{ blog_item.get_src_image }}" alt="" />
         {{ blog_item.text|safe }}
     </div>
 {% endblock %}

@@ -2,7 +2,7 @@
 DATABASE_NAME = u'masterskayaSila'
 PROJECT_NAME = u'masterskayaSila'
 SITE_NAME = u'Мастерская сила'
-DEFAULT_FROM_EMAIL = u'support@masterskayasila.octweb.ru'
+DEFAULT_FROM_EMAIL = u'support@sila.octweb.ru'
 
 from config.base import *
 

@@ -52,14 +52,7 @@
 
                     <div class="works_all load_block">
 
-                        <input type="hidden" class="add_parameter" value="{{ category.id }}|get_works().filter(profile='{{ profile.id }}')">
-                        {% block_items_loader category.works "ClientsWorkCategory" "clientsworks" "clientwork" "" "" %}
-
-                        <div class="works_show_more service_load_button">
-                            <div class="show_more">
-                                <a href="#" class="load_items">Ещё <span class="cnt">3</span></a>
-                            </div>
-                        </div>
+                        {% block_items_loader category.works "ClientsWorkCategory" "clientsworks" "clientwork" 3 category.id profile.get_work_add_parameter  %}
 
                     </div>
 
@@ -85,10 +78,8 @@
                         <div class="docs_group load_block">
                             <div class="docs_group_name">{{ doc_category.title }}<div class="docs_group_r"></div></div>
 
-                            <input type="hidden" class="add_parameter" value="{{ doc_category.id }}|get_docs().filter(profile='{{ profile.id }}')">
-                            {% block_items_loader doc_category.docs "DocumentsCategory" "clientsworks" "clientdoc" "" "" %}
+                            {% block_items_loader doc_category.docs "DocumentsCategory" "clientsworks" "clientdoc" 2 doc_category.id profile.get_doc_add_parameter %}
 
-                            <a href="#" class="doc_show_more load_items service_load_button">ещё <span class="cnt">2</span> документа</a>
                         </div>
                     {% endif %}
                 {% endfor %}

@@ -50,14 +50,13 @@ $(function(){
 	});
 	overflow();
     SetJcoverFlip();
-
 });
 
 function SetJcoverFlip()
 {
     $('.flip').jcoverflip({
         current: 1,
-        titleAnimateIn: function(){},
+        titleAnimateIn: function(s){},
         titleAnimateOut: function(){},
         beforeCss: function( el, container, offset ){
             return [
@@ -78,4 +77,16 @@ function SetJcoverFlip()
             ];
         }
     });
+
+    $('.ui-jcoverflip--item img').hover(function(){
+        opct = $(this).css('opacity');
+        $(this).css('opacity',1);
+    },
+    function(){
+        $(this).css('opacity',opct);
+    });
+    $('.ui-jcoverflip--item img').click(function(){
+        $(this).css('opacity',1);
+        opct = 1;
+    })
 }

@@ -7,6 +7,14 @@
         </div>
 {% endfor %}
 
+{% if initial and next_count %}
+        {% if next_count < load_count %}
+            <a href="#" class="doc_show_more load_items service_load_button">ещё <span class="cnt">{{ next_count }}</span> документ{{ next_count|choose_plural:",а,ов" }}</a>
+        {% else %}
+            <a href="#" class="doc_show_more load_items service_load_button">ещё <span class="cnt">{{ load_count }}</span> документ{{ load_count|choose_plural:",а,ов" }}</a>
+        {% endif %}
+{% endif %}
+
 {% if remaining_count %}
     <input type="hidden" id="remaining_count_text" value="ещё <span class='cnt'>{{ remaining_count }}</span> документ{{ remaining_count|choose_plural:",а,ов" }}">
 {% endif %}

@@ -33,7 +33,7 @@
 .menu li, .col, .service_ic, .def_short, .client_srvs li, .work_lnk, .srv_example_lnk, .customers li,
 .our_offer_in, .video_example, .foto_example, .smi_example, .new_video, .new_out_adv, .work_video, 
 .work_out_adv, .video_examples .helper, .foto_example_img .helper, .smi_example_img .helper,
-.work_video_title_short, .work_out_adv_title_short, .docs_group_name {
+.work_video_title_short, .work_out_adv_title_short, .docs_group_name, .srv_example {
 	*display:inline;
 	*zoom:1;
 }

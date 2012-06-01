@@ -23,11 +23,7 @@
         {% if category.id == 4 %}
             <div class="video_examples load_block">
 
-                {% block_items_loader category.get_works_to_show "WorkCategory" "service" "video_example" category.id "get_works()" %}
-
-                <div class="show_more service_load_button">
-                    <a href="#" class="load_items">Ещё <span class="cnt">2</span> работы</a>
-                </div>
+                {% block_items_loader category.get_works_to_show "WorkCategory" "service" "video_example" 2 category.id "get_works()" %}
 
             </div><!-- /video_examples -->
         {% endif %}
@@ -51,11 +47,7 @@
     {% if category.id != 4 %}
         <div class="out_adv_examples load_block">
 
-            {% block_items_loader category.get_works_to_show "WorkCategory" "service" "outadv" category.id "get_works()" %}
-
-            <div class="show_more service_load_button">
-                <a href="#" class="load_items">Ещё <span class="cnt">2</span> работы</a>
-            </div>
+            {% block_items_loader category.get_works_to_show "WorkCategory" "service" "outadv" 2 category.id "get_works()" %}
 
         </div><!-- /out_adv_examples -->
     {% endif %}

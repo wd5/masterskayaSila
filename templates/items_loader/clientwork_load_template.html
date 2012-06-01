@@ -25,6 +25,19 @@
 
 {% endfor %}
 
+
+{% if initial and next_count %}
+    <div class="works_show_more service_load_button">
+        <div class="show_more">
+        {% if next_count < load_count %}
+            <a href="#" class="load_items">Ещё <span class="cnt">{{ next_count }}</span></a>
+        {% else %}
+            <a href="#" class="load_items">Ещё <span class="cnt">{{ load_count }}</span></a>
+        {% endif %}
+        </div>
+    </div>
+{% endif %}
+
 {% if remaining_count %}
     <input type="hidden" id="remaining_count_text" value="Ещё <span class='cnt'>{{ remaining_count }}</span>">
 {% endif %}

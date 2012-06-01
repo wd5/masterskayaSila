@@ -21,12 +21,8 @@
                             <span class="work_group_title">Видеопродукция</span>
                         </div>
 
-                        <input type="hidden" class="add_parameter" value="{{ category.id }}|get_works().filter(client='{{ client.id }}')">
-                        {% block_items_loader category.works "WorkCategory" "service" "video_cl" "" "" %}
+                        {% block_items_loader category.works "WorkCategory" "service" "video_cl" 2 category.id client.get_add_parameter %}
 
-                        <div class="show_more service_load_button">
-                            <a href="#" class="load_items">Ещё <span class="cnt">2</span> работы</a>
-                        </div>
                     </div><!-- /video_examples -->
                 {% endif %}
 
@@ -55,12 +51,8 @@
                         <span class="work_group_title">Фотосъемка</span>
                     </div>
 
-                    <input type="hidden" class="add_parameter" value="{{ category.id }}|get_works().filter(client='{{ client.id }}')">
-                    {% block_items_loader category.works "WorkCategory" "service" "outadv_cl" "" "" %}
+                    {% block_items_loader category.works "WorkCategory" "service" "outadv_cl" 2 category.id client.get_add_parameter %}
 
-                    <div class="show_more service_load_button">
-                        <a href="#" class="load_items">Ещё <span class="cnt">2</span> работы</a>
-                    </div>
                 </div><!-- /foto_examples -->
             {% endif %}
 
@@ -71,12 +63,8 @@
                         <span class="work_group_title">СМИ</span>
                     </div>
 
-                    <input type="hidden" class="add_parameter" value="{{ category.id }}|get_works().filter(client='{{ client.id }}')">
-                    {% block_items_loader category.works "WorkCategory" "service" "outadv_cl" "" "" %}
+                    {% block_items_loader category.works "WorkCategory" "service" "outadv_cl" 2 category.id client.get_add_parameter %}
 
-                    <div class="show_more service_load_button">
-                        <a href="#" class="load_items">Ещё <span class="cnt">2</span> работы</a>
-                    </div>
                 </div><!-- /smi_examples -->
             {% endif %}
 
@@ -87,12 +75,8 @@
                         <span class="work_group_title">Дизайн</span>
                     </div>
 
-                    <input type="hidden" class="add_parameter" value="{{ category.id }}|get_works().filter(client='{{ client.id }}')">
-                    {% block_items_loader category.works "WorkCategory" "service" "outadv_cl" "" "" %}
+                    {% block_items_loader category.works "WorkCategory" "service" "outadv_cl" 2 category.id client.get_add_parameter %}
 
-                    <div class="show_more service_load_button">
-                        <a href="#" class="load_items">Ещё <span class="cnt">2</span> работы</a>
-                    </div>
                 </div><!-- /design_examples -->
             {% endif %}
 
@@ -103,12 +87,7 @@
                         <span class="work_group_title">Билборды и рекламная компания</span>
                     </div>
 
-                    <input type="hidden" class="add_parameter" value="{{ category.id }}|get_works().filter(client='{{ client.id }}')">
-                    {% block_items_loader category.works "WorkCategory" "service" "outadv_cl" "" "" %}
-
-                    <div class="show_more service_load_button">
-                        <a href="#" class="load_items">Ещё <span class="cnt">2</span> работы</a>
-                    </div>
+                    {% block_items_loader category.works "WorkCategory" "service" "outadv_cl" 2 category.id client.get_add_parameter %}
 
                 </div><!-- /out_adv_examples -->
             {% endif %}

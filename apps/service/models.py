@@ -90,10 +90,13 @@ class Client(models.Model):
     def get_works_categories_and_works(self):
         categories = WorkCategory.objects.published()
         for item in categories:
-            work = Work.objects.published().filter(client=self.id, workcategory = item)[:1]
+            work = Work.objects.published().filter(client=self.id, workcategory = item)[:2]
             if work:
                 setattr(item, 'works', work)
         return categories
+
+    def get_add_parameter(self):
+        return "get_works().filter(client='%s')" % self.id
 
 def image_path_works(instance, filename):
     return os.path.join('images','works', translify(filename).replace(' ', '_') )

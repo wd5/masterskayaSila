@@ -7,11 +7,7 @@
 {% block left %}
     <div class="blog load_block">
 
-        {% block_items_loader blog "blog" "siteblocks" "blog" "" "" %}
-
-        <div class="show_more service_load_button">
-            <a href="#" class="load_items">Ещё <span class="cnt">4</span> записи</a>
-        </div>
+        {% block_items_loader blog "blog" "siteblocks" "blog" 4 "" "" %}
 
     </div><!-- /blog -->
 {% endblock %}

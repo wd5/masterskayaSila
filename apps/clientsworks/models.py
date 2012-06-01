@@ -80,6 +80,12 @@ class Profile(models.Model):
                 setattr(item, 'docs', docs)
         return categories
 
+    def get_work_add_parameter(self):
+        return "get_works().filter(profile='%s')" % self.id
+
+    def get_doc_add_parameter(self):
+        return "get_docs().filter(profile='%s')" % self.id
+
 def image_path_ClientMedia(instance, filename):
     return os.path.join('images','clientWorksMedia', translify(filename).replace(' ', '_') )
 
