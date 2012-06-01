@@ -1,8 +1,8 @@
 msgid "Pages"
-msgstr "Статичные страницы и META"
+msgstr "Структура сайта"
 
 msgid "pages"
-msgstr "статичные страницы и META"
+msgstr "структура сайта"
 
 msgid "page_items"
 msgstr "страницы"

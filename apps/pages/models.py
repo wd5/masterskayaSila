@@ -18,7 +18,7 @@ class Page(MPTTModel):
 
     is_published = models.BooleanField(verbose_name=u'Опубликовано', default = True)
     is_at_menu = models.BooleanField(verbose_name=u'Отображать в меню', default = False)
-    is_at_footer_menu = models.BooleanField(verbose_name=u'Отображать в меню, внизу страниц', default = False)
+    is_at_footer_menu = models.BooleanField(verbose_name=u'Отображать в нижнем меню', default = False)
     template = models.CharField(verbose_name=u'шаблон', max_length=100, editable=False, default=u'default.html')
 
     objects = TreeManager()

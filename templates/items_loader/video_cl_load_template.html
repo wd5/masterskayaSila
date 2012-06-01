@@ -4,11 +4,11 @@
 
     {% for media in item.get_works_media %}
         <div class="video_example{% if not initial %} loaded" style="display: none;{% endif %}">
-            <div class="video_example_img">
+            <a href="{{ media.code_video }}" class="video_example_img">
                 <img src="{{ media.get_src_image }}" alt="" />
-                <a href="{{ media.code_video }}" class="play_ic"></a>
-            </div>
-            <span class="video_example_title">{{ item.title }}</span>
+                <span class="play_ic"></span>
+            </a>
+            <a href="{{ media.code_video }}" class="video_example_title">{{ item.title }}</a>
         </div>
     {% endfor %}
     <div class="helper"></div>

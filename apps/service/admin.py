@@ -58,6 +58,7 @@ class WorkForm(forms.ModelForm):
 class WorksMeidaInline(AdminImageMixin,admin.TabularInline):
     model = WorksMedia
     form = WorkForm
+    extra = 0
 
 class WorkAdmin(AdminImageMixin, admin.ModelAdmin):
     list_display = ('id','title','date_create','is_published',)

@@ -19,20 +19,24 @@
                     {% for work in profile.get_new_works %}
                         {% if work.workcategory.id == 4 %}
                             <div class="new_video">
-                                <div class="new_video_img">
+                                <a href="{{ work.code_video }}" class="new_video_img">
                                     {% thumbnail work.image "201x123" crop="center" as im %}
                                         <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" />
                                     {% endthumbnail %}
-                                    <a href="{{ work.code_video }}" class="play_ic"></a>
-                                </div>
-                                <span class="new_video_title_short">{{ work.title }}</span>
+                                    <span rel="asd" class="play_ic"></span>
+                                </a>
+                                <a href="{{ work.code_video }}" class="new_video_title_short">{{ work.title }}</a>
                             </div>
                         {% else %}
                             <div class="new_out_adv">
                                 <div class="new_out_adv_img">
+                                {% thumbnail work.image "1000" upscale=0 as big %}
                                     {% thumbnail work.image "297x148" crop="center" as im %}
-                                        <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" />
+                                        <a href="{{ big.url }}" rel="asd" class="fancybox">
+                                            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" />
+                                        </a>
                                     {% endthumbnail %}
+                                {% endthumbnail %}
                                 </div>
                                 <span class="new_out_adv_title">{{ work.title }}</span>
                             </div>

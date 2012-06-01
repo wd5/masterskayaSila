@@ -4,19 +4,23 @@
 
     {% if item.workcategory.id == 4 %}
         <div class="work_video{% if not initial %} loaded" style="display: none;{% endif %}">
-            <div class="work_video_img">
+            <a href="{{ item.code_video }}" class="work_video_img">
                 {% thumbnail item.image "115x70" crop="center" as im %}
                     <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" />
                 {% endthumbnail %}
-                <a href="{{ item.code_video }}" class="play_ic_zs"></a>
-            </div>
-            <span class="work_video_title_short">{{ item.title }}</span>
+                <span class="play_ic_zs"></span>
+            </a>
+            <a href="{{ item.code_video }}" class="work_video_title_short">{{ item.title }}</a>
         </div>
     {% else %}
         <div class="work_out_adv{% if not initial %} loaded" style="display: none;{% endif %}">
             <div class="work_out_adv_img">
-                {% thumbnail item.image "115x70" crop="center" as im %}
-                    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" />
+                {% thumbnail item.image "1000" upscale=0 as big %}
+                    {% thumbnail item.image "115x70" crop="center" as im %}
+                        <a href="{{ big.url }}" class="fancybox" rel="{{ item.workcategory.id }}">
+                            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" />
+                        </a>
+                    {% endthumbnail %}
                 {% endthumbnail %}
             </div>
             <span class="work_out_adv_title_short">{{ item.title }}</span>

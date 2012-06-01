@@ -22,6 +22,7 @@ admin.site.register(DocumentsCategory, DocumentsCategoryAdmin)
 
 class DocumentInline(AdminImageMixin,admin.TabularInline):
     model = Document
+    extra = 0
 
 class ClientsWorkForm(forms.ModelForm):
     class Meta:
@@ -36,6 +37,7 @@ class ClientsWorkForm(forms.ModelForm):
 class ClientsWorkInline(AdminImageMixin,admin.TabularInline):
     model = ClientsWork
     form = ClientsWorkForm
+    extra = 0
 
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ('id','user','order','is_published',)

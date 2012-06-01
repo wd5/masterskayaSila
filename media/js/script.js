@@ -1,5 +1,5 @@
 $(function(){
-
+    var opct;
     // для блока block_adv_maintenance 'small'
     p = $('#adv_text_blc').find('p').first();
     $('#adv_text_blc').html($('#adv_text_blc').find('a'));
@@ -8,7 +8,7 @@ $(function(){
 
     $('.fancybox').fancybox();
 
-    $(".play_ic, .play_ic_zs").live('click',function(){
+    $(".video_example_img, .video_example_title, .work_video_img, .work_video_title_short, .new_video_img, .new_video_title_short").live('click',function(){
         $.fancybox({
                 'padding'		: 0,
                 'autoScale'		: false,
@@ -50,6 +50,17 @@ $(function(){
 	});
 	overflow();
     SetJcoverFlip();
+    $('.ui-jcoverflip--item img').hover(function(){
+        opct = $(this).css('opacity');
+        $(this).css('opacity',1);
+    },
+    function(){
+        $(this).css('opacity',opct);
+    });
+    $('.ui-jcoverflip--item img').click(function(){
+        $(this).css('opacity',1);
+        opct = 1;
+    });
 });
 
 function SetJcoverFlip()
@@ -78,15 +89,4 @@ function SetJcoverFlip()
         }
     });
 
-    $('.ui-jcoverflip--item img').hover(function(){
-        opct = $(this).css('opacity');
-        $(this).css('opacity',1);
-    },
-    function(){
-        $(this).css('opacity',opct);
-    });
-    $('.ui-jcoverflip--item img').click(function(){
-        $(this).css('opacity',1);
-        opct = 1;
-    })
 }

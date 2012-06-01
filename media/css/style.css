@@ -516,7 +516,7 @@ h3 {
 	margin: 0 0 36px 160px;
 }
 .work_group {
-	margin: 0 0 24px;
+	margin: 0 0 24px 80px;
 }
 .work_group img {
 	vertical-align: middle;
@@ -697,8 +697,16 @@ h3 {
 	margin-bottom: 12px;
 	text-align: center;
 }
+.video_example_img, .work_video_img, .new_video_img {
+	display: block;
+}
 .video_example_title, .foto_example_title, .smi_example_title, .new_video_title_short {
 	font-weight: bold;
+	text-decoration: none;
+	color: #3f2200;
+}
+.video_example_title, .new_video_title_short {
+	display: block;
 }
 .play_ic {
 	display: block;
@@ -792,7 +800,9 @@ h3 {
 .work_video_title_short, .work_out_adv_title_short {
 	display: inline-block;
 	margin: 8px;
-	text-align: left;
+	text-align: left;	
+	text-decoration: none;
+	color: #3f2200;
 }
 .works_show_more {
 	position: absolute;
