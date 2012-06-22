@@ -9,7 +9,9 @@
                 <li><img src="{{ works_media.get_src_image }}" alt="{{ item.title }}" /></li>
             {% endfor %}
         </ul>
-    <script type="text/javascript">SetJcoverFlip();</script>
+        {% if not initial %}
+            <script type="text/javascript">SetJcoverFlip();</script>
+        {% endif %}
     </div>
 
 {% endfor %}
