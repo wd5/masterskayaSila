@@ -312,6 +312,14 @@ h3 {
 	text-decoration: underline;
 	font-weight: bold;
 }
+a.logout {
+	display: inline-block;
+	vertical-align: top;
+	width: 13px;
+	height: 16px;
+	margin: 0 0 0 10px;
+	background: url(../img/logout.png) 0 0 no-repeat;
+}
 /*/login_lnk*/
 /*--------------HEADER-END--------------*/
 
