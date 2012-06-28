@@ -612,10 +612,10 @@ a.logout {
 /*customers*/
 .customers {
 	position: relative;
-	height: 81px;
+	height: 92px;
 	background: url(../img/customers_pl.png) 0 0 repeat-x;
 	margin: 0 26px 0 16px;
-	padding: 29px 20px 0 20px;
+	padding: 18px 20px 0 20px;
 	text-align: justify;
 	text-justify: newspaper;
 }
@@ -638,11 +638,12 @@ a.logout {
 	display: inline-block;
 	vertical-align: top;
 }
-.customers_all {
+li.customers_all {
 	width: 85px;
 	height: 51px;
 	background: url(../img/customers_all.png) 0 0 no-repeat;
 	text-align: left;
+	vertical-align: bottom;
 }
 .customers_all_lnk {
 	display: block;

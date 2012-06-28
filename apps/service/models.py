@@ -136,8 +136,12 @@ class Work(models.Model):
             href = 'design_examples'
         elif id_cat==1:
             href = 'out_adv_examples'
+        elif id_cat==6:
+            href = 'pred_examples'
+        else:
+            href = ''
 
-        return u'%s#%s' % (self.client.get_absolute_url(),href)
+        return u'%s#%s' % (self.client.get_absolute_url(), href)
 
     def get_works_media(self):
         return self.worksmedia_set.all()
