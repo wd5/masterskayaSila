@@ -5,7 +5,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="description" content="{% block META_description %}{{ meta.description }}{% endblock %}"/>
     <meta name="keywords" content="{% block META_keywords %}{{ meta.keywords }}{% endblock %}"/>
-    <link href="/media/css/style.css" rel="stylesheet" type="text/css" />
+	<link href="/media/img/favicon.ico" type="image/x-icon" rel="icon" />
+	<link href="/media/img/favicon.ico" type="image/x-icon" rel="shortcut icon"/>
+	<link href="/media/css/style.css" rel="stylesheet" type="text/css" />
     <!--[if lte IE 8]><link rel="stylesheet" type="text/css" media="screen" href="/media/css/ie.css" /><![endif]-->
     <script type="text/javascript" src="/media/js/jquery.js"></script>
     <script type="text/javascript" src="/media/js/jquery.ui.js"></script>
@@ -131,6 +133,30 @@
         	</div><!-- /overlay_in -->
         </div><!-- /overlay -->
     {% endif %}
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+(function (d, w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+            w.yaCounter15990424 = new Ya.Metrika({id:15990424,
+                    clickmap:true,
+                    accurateTrackBounce:true});
+        } catch(e) {}
+    });
+    
+    var n = d.getElementsByTagName("script")[0],
+        s = d.createElement("script"),
+        f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
 
+    if (w.opera == "[object Opera]") {
+        d.addEventListener("DOMContentLoaded", f);
+    } else { f(); }
+})(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="//mc.yandex.ru/watch/15990424" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
 </body>
 </html>

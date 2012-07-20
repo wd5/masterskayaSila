@@ -4,14 +4,15 @@
 
     {% for media in item.get_works_media %}
         <div class="video_example{% if not initial %} loaded" style="display: none;{% endif %}">
-            <a href="{{ media.code_video }}" class="video_example_img">
+            <a href="/showmedia/workmedia/{{ media.id }}/" class="video_example_img">
                 <img src="{{ media.get_src_image }}" alt="" />
                 <span class="play_ic"></span>
             </a>
-            <a href="{{ media.code_video }}" class="video_example_title">{{ item.title }}</a>
+            <a href="/showmedia/workmedia/{{ media.id }}/" class="video_example_title">{{ item.title }}</a>
         </div>
     {% endfor %}
-    <div class="helper"></div>
+    <script type="text/javascript">SetVideoFancy();</script>
+{#    <div class="helper"></div>#}
 
 {% endfor %}
 
@@ -28,6 +29,3 @@
 {% if remaining_count %}
     <input type="hidden" id="remaining_count_text" value="Ещё <span class='cnt'>{{ remaining_count }}</span> работ{{ remaining_count|choose_plural:"а,ы," }}">
 {% endif %}
-
-
-

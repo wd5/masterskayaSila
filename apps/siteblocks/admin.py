@@ -28,6 +28,7 @@ class SettingsAdminForm(forms.ModelForm):
 
 class SettingsAdmin(admin.ModelAdmin):
     list_display = ('title','name','value',)
+    fields = ('title','value',)
     form = SettingsAdminForm
 admin.site.register(Settings, SettingsAdmin)
 
