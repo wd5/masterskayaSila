@@ -1,20 +1,33 @@
 {% load pytils_numeral %}
 
-{% for item in items %}
-
+{% comment %}{% for item in items %}
     {% for works_media in item.get_works_media %}
+
         <div class="video_example{% if not initial %} loaded" style="display: none;{% endif %}">
             <a href="/showmedia/workmedia/{{ works_media.id }}/" class="video_example_img">
                 <img src="{{ works_media.get_src_image }}" alt="" />
                 <span class="play_ic"></span>
             </a>
-            <a href="/showmedia/workmedia/{{ works_media.id }}/" class="video_example_title">{{ item.title }}</a>
+            <a href="/showmedia/workmedia/{{ works_media.id }}/" class="video_example_title">{{ works_media.work.title }}</a>
         </div>
-    {% endfor %}
-    <script type="text/javascript">SetVideoFancy();</script>
-{#    <div class="helper"></div>#}
 
+    {% endfor %}
+{% endfor %}{% endcomment %}
+
+{% for works_media in items %}
+
+        <div class="video_example{% if not initial %} loaded" style="display: none;{% endif %}">
+            <a href="/showmedia/workmedia/{{ works_media.id }}/" class="video_example_img">
+                <img src="{{ works_media.get_src_image }}" alt="" />
+                <span class="play_ic"></span>
+            </a>
+            <a href="/showmedia/workmedia/{{ works_media.id }}/" class="video_example_title">{{ works_media.work.title }}</a>
+        </div>
 {% endfor %}
+
+{#    <div class="helper"></div>#}
+<script type="text/javascript">SetVideoFancy();</script>
+
 
 {% if initial and next_count %}
     <div class="show_more service_load_button">

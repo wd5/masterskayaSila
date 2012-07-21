@@ -154,6 +154,10 @@ class WorksMedia(models.Model):
     image = ImageField(upload_to=image_path_media, verbose_name=u'изображение')
     code_video = models.TextField(verbose_name=u'код видеоролика', blank=True)
     order = models.IntegerField(u'порядок сортировки', help_text=u'Чем больше число, тем выше располагается элемент', default=10)
+    is_published = models.BooleanField(verbose_name=u'опубликовано', default=True)
+
+    objects = PublishedManager()
+
 
     def __unicode__(self):
            return u'контент к работе %s' % self.work.title

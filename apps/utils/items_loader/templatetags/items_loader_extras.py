@@ -24,6 +24,12 @@ def block_items_loader(queryset, model_name, app_name, template_name, load_count
                 count = False
         except model.DoesNotExist:
             count = False
+    elif add_parameter and not add_id: # доделка - если отправлять доп параметр без id
+        try:
+            exec('full_queryset = model.objects.%s' % add_parameter)
+            count = full_queryset.count()
+        except:
+            count = False
     elif model:
         try:
             full_queryset = model.objects.published()

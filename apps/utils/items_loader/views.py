@@ -37,14 +37,20 @@ class ItemsLoaderView(View):
 
             if add_parameter:
                 param = add_parameter.split('|')
-                try:
-                    qs_item = model.objects.get(id=param[0])
+                if param[0]=='False':
                     try:
-                        exec('queryset = qs_item.%s' % param[1])
+                        exec('queryset = model.objects.%s' % param[1])
                     except:
-                        HttpResponseBadRequest()
-                except model.DoesNotExist:
-                    return HttpResponseBadRequest()
+                        return HttpResponseBadRequest()
+                else:
+                    try:
+                        qs_item = model.objects.get(id=param[0])
+                        try:
+                            exec('queryset = qs_item.%s' % param[1])
+                        except:
+                            return HttpResponseBadRequest()
+                    except model.DoesNotExist:
+                        return HttpResponseBadRequest()
             elif model:
                 try:
                     queryset = model.objects.published()

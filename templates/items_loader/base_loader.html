@@ -6,7 +6,7 @@
         <input type="hidden" class="template" autocomplete="off" value="{{ template_name }}">
         <input type="hidden" class="init_cnt" autocomplete="off" value="{{ items.count }}">
 
-        {% if add_parameter and add_id %}
+        {% if add_parameter or add_id %}
             <input type="hidden" class="add_parameter" autocomplete="off" value="{{ add_id }}|{{ add_parameter }}">
         {% endif %}
 

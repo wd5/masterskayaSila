@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.views.generic import ListView, DetailView, TemplateView
-from apps.service.models import WorkCategory,Client, WorksMedia
+from apps.service.models import WorkCategory, Client, WorksMedia
 from apps.clientsworks.models import ClientsWork
 from apps.siteblocks.models import Blog
 
@@ -19,6 +19,10 @@ class ShowCategoryView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(ShowCategoryView, self).get_context_data(**kwargs)
+
+        if self.object:
+            if  self.object.id == 4:
+                context['video_works_media'] = WorksMedia.objects.filter(work__workcategory__id=4).order_by('-work__date_create')[:self.object.works_count]
 
         text_parts = context['category'].description
         pos = text_parts.find('\n')
@@ -76,9 +80,9 @@ class ShowMediaView(TemplateView):
             type = False
 
         if pk and type:
-            if type=='workmedia':
+            if type == 'workmedia':
                 code = WorksMedia.objects.get(id=pk)
-            elif type=='cabinetmedia':
+            elif type == 'cabinetmedia':
                 code = ClientsWork.objects.get(id=pk)
             else:
                 code = False

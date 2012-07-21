@@ -20,14 +20,6 @@
         </div>
         <!--[if gte IE 8]><div class="cl"></div><![endif]-->
 
-        {% if category.id == 4 %}
-            <div class="video_examples load_block">
-
-                {% block_items_loader category.get_works_to_show "WorkCategory" "service" "video_example" 2 category.id "get_works()" %}
-
-            </div><!-- /video_examples -->
-        {% endif %}
-
     </div><!-- /service_detail -->
 {% endblock %}
 
@@ -43,6 +35,16 @@
 {% endblock %}
 
 {% block post_right %}
+
+    {% if category.id == 4 %}
+        <div class="video_examples load_block">
+
+            {% block_items_loader video_works_media "WorksMedia" "service" "video_example" 3 '' "filter(work__workcategory__id=4).order_by('-work__date_create')" %}
+{% comment %}            {% block_items_loader category.get_works_to_show "WorkCategory" "service" "video_example" 3 category.id "get_works()" %}{% endcomment %}
+
+
+        </div><!-- /video_examples -->
+    {% endif %}
 
     {% if category.id != 4 %}
         <div class="out_adv_examples load_block">
