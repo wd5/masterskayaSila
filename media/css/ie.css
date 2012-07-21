@@ -47,6 +47,11 @@
 .adv_full_zs span {
 	left: -2px;
 }
+.customers img, .client_icon img {
+	border: 1px solid #9f9b99;
+	border-bottom-width: 3px;
+	border-top-width: 0;
+}
 /*6-7*/
 
 
