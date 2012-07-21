@@ -4,13 +4,13 @@
 
     {% if item.workcategory.id == 4 %}
         <div class="work_video{% if not initial %} loaded" style="display: none;{% endif %}">
-            <a href="{{ item.code_video }}" class="work_video_img">
+            <a href="/showmedia/cabinetmedia/{{ item.id }}/" class="work_video_img">
                 {% thumbnail item.image "115x70" crop="center" as im %}
                     <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" />
                 {% endthumbnail %}
                 <span class="play_ic_zs"></span>
             </a>
-            <a href="{{ item.code_video }}" class="work_video_title_short">{{ item.title }}</a>
+            <a href="/showmedia/cabinetmedia/{{ item.id }}/" class="work_video_title_short">{{ item.title }}</a>
         </div>
     {% else %}
         <div class="work_out_adv{% if not initial %} loaded" style="display: none;{% endif %}">
@@ -28,7 +28,7 @@
     {% endif %}
 
 {% endfor %}
-
+<script type="text/javascript">$(function(){$('.fancybox').fancybox();});SetVideoFancy();</script>
 
 {% if initial and next_count %}
     <div class="works_show_more service_load_button">

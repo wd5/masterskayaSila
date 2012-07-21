@@ -19,13 +19,13 @@
                     {% for work in profile.get_new_works %}
                         {% if work.workcategory.id == 4 %}
                             <div class="new_video">
-                                <a href="{{ work.code_video }}" class="new_video_img">
+                                <a href="/showmedia/cabinetmedia/{{ work.id }}/" class="new_video_img">
                                     {% thumbnail work.image "201x123" crop="center" as im %}
                                         <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" />
                                     {% endthumbnail %}
                                     <span rel="asd" class="play_ic"></span>
                                 </a>
-                                <a href="{{ work.code_video }}" class="new_video_title_short">{{ work.title }}</a>
+                                <a href="/showmedia/cabinetmedia/{{ work.id }}/" class="new_video_title_short">{{ work.title }}</a>
                             </div>
                         {% else %}
                             <div class="new_out_adv">

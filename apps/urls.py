@@ -6,7 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from views import index
 from apps.utils.items_loader.views import items_loader
-from apps.service.views import show_work_category,show_client
+from apps.service.views import show_work_category,show_client, show_media
 from apps.siteblocks.views import show_blog_item
 from apps.clientsworks.views import show_cabinet
 
@@ -14,6 +14,7 @@ urlpatterns = patterns('',
 
     url(r'^$',index, name='index'),
     (r'^load_items/$',csrf_exempt(items_loader)),
+    url(r'^showmedia/(?P<type>[^/]+)/(?P<pk>[^/]+)/$',show_media, name='show_media'),
 
     (r'^services_and_works/$','apps.service.views.show_categories'),
     url(r'^services_and_works/(?P<slug>[^/]+)/$',show_work_category, name='show_work_category'),

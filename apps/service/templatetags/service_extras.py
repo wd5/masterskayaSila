@@ -23,6 +23,8 @@ def category_pic(id,size):
         path = '/media/img/out_adv_%s.png' % size
     elif id==3:
         path = '/media/img/smi_%s.png' % size
+    elif id==6:
+        path = '/media/img/prod_%s.png' % size
     else:
         path = ''
     return path
@@ -40,6 +42,8 @@ def category_href(id):
         href = 'out_adv_examples'
     elif id==3:
         href = 'smi_examples'
+    elif id==6:
+        href = 'pred_examples'
     else:
         href = ''
     return href

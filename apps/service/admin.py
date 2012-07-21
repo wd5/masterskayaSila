@@ -26,6 +26,10 @@ class WorkCategoryAdmin(AdminImageMixin, admin.ModelAdmin):
 admin.site.register(WorkCategory, WorkCategoryAdmin)
 
 class ClientAdminForm(forms.ModelForm):
+    description = forms.CharField(
+        widget=Redactor(attrs={'cols': 170, 'rows': 20}),
+        label = u'Описание',
+    )
     class Meta:
         model = Client
 
@@ -61,10 +65,10 @@ class WorksMeidaInline(AdminImageMixin,admin.TabularInline):
     extra = 0
 
 class WorkAdmin(AdminImageMixin, admin.ModelAdmin):
-    list_display = ('id','title','date_create','is_published',)
+    list_display = ('id','title','client','date_create','is_published',)
     list_display_links = ('id','title','date_create',)
     list_editable = ('is_published',)
-    list_filter = ('is_published','date_create','client','workcategory',)
+    list_filter = ('is_published','date_create','workcategory','client',)
     search_fields = ('title','description',)
     inlines = [
         WorksMeidaInline

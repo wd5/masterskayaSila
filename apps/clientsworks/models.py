@@ -41,14 +41,14 @@ def image_path_client(instance, filename):
     return os.path.join('images','clients', translify(filename).replace(' ', '_') )
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, verbose_name=u'пользователь', unique=True)
+    user = models.ManyToManyField(User, verbose_name=u'пользователь', blank=True)
     order = models.IntegerField(u'порядок сортировки', help_text=u'Чем больше число, тем выше располагается элемент', default=10)
     is_published = models.BooleanField(verbose_name=u'опубликовано', default=True)
 
     objects = PublishedManager()
 
     def __unicode__(self):
-        return u'%s %s' % (self.user.first_name,self.user.last_name)
+        return u'профиль №%s' % self.id
 
     class Meta:
         ordering = ['-order']
@@ -85,6 +85,18 @@ class Profile(models.Model):
 
     def get_doc_add_parameter(self):
         return "get_docs().filter(profile='%s')" % self.id
+
+    def prof_title(self):
+        user_set = self.user.all()
+        if user_set:
+            str = ''
+            for user in user_set:
+                str='%s, %s' % (user.first_name,str)
+            return u'%s' % str[:-2]
+        else:
+            return u'не выбрано'
+    prof_title.allow_tags = True
+    prof_title.short_description = 'Пользователи'
 
 def image_path_ClientMedia(instance, filename):
     return os.path.join('images','clientWorksMedia', translify(filename).replace(' ', '_') )

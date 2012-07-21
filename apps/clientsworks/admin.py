@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
+from django.contrib.auth.models import User
 from django import forms
 from apps.clientsworks.models import ClientsWork,ClientsWorkCategory,Document,DocumentsCategory,Profile
 from apps.utils.widgets import Redactor,AdminImageWidget
@@ -39,11 +40,17 @@ class ClientsWorkInline(AdminImageMixin,admin.TabularInline):
     form = ClientsWorkForm
     extra = 0
 
+class ProfileAdminForm(forms.ModelForm):
+    user = forms.ModelMultipleChoiceField(queryset=User.objects.filter(is_staff=False),widget=forms.CheckboxSelectMultiple(),required=False, label='Пользователи')
+    class Meta:
+        model = Profile
+
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('id','user','order','is_published',)
-    list_display_links = ('id','user',)
+    list_display = ('id','prof_title','order','is_published',)
+    list_display_links = ('id',)
     list_editable = ('order','is_published',)
     list_filter = ('is_published',)
+    form = ProfileAdminForm
     inlines = [
         ClientsWorkInline,
         DocumentInline

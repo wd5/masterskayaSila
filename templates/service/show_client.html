@@ -92,6 +92,18 @@
                 </div><!-- /out_adv_examples -->
             {% endif %}
 
+            {% if category.id == 6 %}
+                <div class="out_adv_examples load_block" id="pred_examples">
+                    <div class="work_group">
+                        <img src="/media/img/prod_zs.png" alt="" />
+                        <span class="work_group_title">Представительская продукция</span>
+                    </div>
+
+                    {% block_items_loader category.works "WorkCategory" "service" "outadv_cl" 2 category.id client.get_add_parameter %}
+
+                </div><!-- /out_adv_examples -->
+            {% endif %}
+
         {% endif %}
 
     {% endfor %}

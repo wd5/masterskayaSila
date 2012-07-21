@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-from django.views.generic import ListView, DetailView
-from apps.service.models import WorkCategory,Client
+from django.views.generic import ListView, DetailView, TemplateView
+from apps.service.models import WorkCategory,Client, WorksMedia
+from apps.clientsworks.models import ClientsWork
 from apps.siteblocks.models import Blog
 
 class ShowCategoriesView(ListView):
@@ -42,7 +43,7 @@ class ShowClientsListView(ListView):
     model = Client
     template_name = 'service/clients_list.html'
     context_object_name = 'clients'
-    queryset = model.objects.published()[:3]
+    queryset = model.objects.published()[:10]
 
 show_clients_list = ShowClientsListView.as_view()
 
@@ -61,3 +62,30 @@ class ShowClientView(DetailView):
         return context
 
 show_client = ShowClientView.as_view()
+
+class ShowMediaView(TemplateView):
+    template_name = 'showmedia.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ShowMediaView, self).get_context_data(**kwargs)
+        try:
+            pk = int(self.kwargs.get('pk', None))
+            type = self.kwargs.get('type', None)
+        except:
+            pk = False
+            type = False
+
+        if pk and type:
+            if type=='workmedia':
+                code = WorksMedia.objects.get(id=pk)
+            elif type=='cabinetmedia':
+                code = ClientsWork.objects.get(id=pk)
+            else:
+                code = False
+        else:
+            code = False
+
+        context['code'] = code
+        return context
+
+show_media = ShowMediaView.as_view()
