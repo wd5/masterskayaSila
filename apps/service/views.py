@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from django.http import Http404, HttpResponseRedirect
 from django.views.generic import ListView, DetailView, TemplateView
 from apps.service.models import WorkCategory, Client, WorksMedia
 from apps.clientsworks.models import ClientsWork
@@ -22,7 +23,7 @@ class ShowCategoryView(DetailView):
 
         if self.object:
             if  self.object.id == 4:
-                context['video_works_media'] = WorksMedia.objects.filter(work__workcategory__id=4).order_by('-work__date_create')[:self.object.works_count]
+                context['video_works_media'] = WorksMedia.objects.filter(work__workcategory__id=4, work__client__is_published=True).order_by('-work__date_create')[:self.object.works_count]
 
         text_parts = context['category'].description
         pos = text_parts.find('\n')
@@ -57,13 +58,13 @@ class ShowClientView(DetailView):
     template_name = 'service/show_client.html'
     context_object_name = 'client'
 
-    def get_context_data(self, **kwargs):
-        context = super(ShowClientView, self).get_context_data(**kwargs)
-
-        if context['client'].is_published == False:
-            context['client'] = False
-
-        return context
+    def get(self, request, **kwargs):
+        self.object = self.get_object()
+        if self.object.is_published == False:
+            return HttpResponseRedirect('/')
+        else:
+            context = self.get_context_data(object=self.object)
+            return self.render_to_response(context)
 
 show_client = ShowClientView.as_view()
 

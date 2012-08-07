@@ -39,7 +39,7 @@
     {% if category.id == 4 %}
         <div class="video_examples load_block">
 
-            {% block_items_loader video_works_media "WorksMedia" "service" "video_example" 3 '' "filter(work__workcategory__id=4).order_by('-work__date_create')" %}
+            {% block_items_loader video_works_media "WorksMedia" "service" "video_example" 6 '' "filter(work__workcategory__id=4, work__client__is_published=True).order_by('-work__date_create')" %}
 {% comment %}            {% block_items_loader category.get_works_to_show "WorkCategory" "service" "video_example" 3 category.id "get_works()" %}{% endcomment %}
 
 

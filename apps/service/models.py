@@ -41,13 +41,13 @@ class WorkCategory(models.Model):
         return self.image.url
 
     def get_works_at_list(self):
-        return self.work_set.published().filter(is_at_category_list=True)
+        return self.work_set.published().filter(is_at_category_list=True, client__is_published=True)
 
     def get_works_to_show(self):
-        return self.work_set.published()[:self.works_count]
+        return self.work_set.published().filter(client__is_published=True)[:self.works_count]
 
     def get_works(self):
-        return self.work_set.published()
+        return self.work_set.published().filter(client__is_published=True)
 
 def image_path_client(instance, filename):
     return os.path.join('images','clients', translify(filename).replace(' ', '_') )
