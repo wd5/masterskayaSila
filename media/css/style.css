@@ -112,11 +112,11 @@ h3 {
 }
 /*corners*/
 .corners {
-	background: url(../img/corners.png) 100% 0 no-repeat;		
+	background: url(../img/corners.png?v1.0) 100% 0 no-repeat;		
 }
 .corner_topleft {
 	position: absolute;
-	right: -37px;
+	right: -36px;
 	top: 0;
 	height: 47px;
 	width: 37px;
@@ -242,6 +242,8 @@ h3 {
 }
 .contacts .corner_topleft {
 	background-position: 100% 100%;
+	width: 37px;
+	right: -37px;
 }
 .contacts .corner_bottomright {
 	background-position: 0 100%;
